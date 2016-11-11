@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA1AAD241DD5B6A900C5B0BE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD221DD5B6A900C5B0BE /* Realm.framework */; };
+		DA1AAD251DD5B6A900C5B0BE /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD221DD5B6A900C5B0BE /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA1AAD261DD5B6A900C5B0BE /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */; };
+		DA1AAD271DD5B6A900C5B0BE /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DACB2D2A1DD5B2640005BEF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */; };
 		DACB2D2C1DD5B2640005BEF4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D2B1DD5B2640005BEF4 /* FirstViewController.swift */; };
 		DACB2D2E1DD5B2640005BEF4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D2D1DD5B2640005BEF4 /* SecondViewController.swift */; };
@@ -34,7 +38,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DA1AAD281DD5B6A900C5B0BE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA1AAD271DD5B6A900C5B0BE /* RealmSwift.framework in Embed Frameworks */,
+				DA1AAD251DD5B6A900C5B0BE /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		DA1AAD221DD5B6A900C5B0BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		DACB2D261DD5B2640005BEF4 /* HydroPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HydroPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DACB2D2B1DD5B2640005BEF4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA1AAD261DD5B6A900C5B0BE /* RealmSwift.framework in Frameworks */,
+				DA1AAD241DD5B6A900C5B0BE /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +102,8 @@
 		DACB2D1D1DD5B2640005BEF4 = {
 			isa = PBXGroup;
 			children = (
+				DA1AAD221DD5B6A900C5B0BE /* Realm.framework */,
+				DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */,
 				DACB2D281DD5B2640005BEF4 /* HydroPal */,
 				DACB2D3F1DD5B2640005BEF4 /* HydroPalTests */,
 				DACB2D4A1DD5B2640005BEF4 /* HydroPalUITests */,
@@ -138,6 +163,8 @@
 				DACB2D221DD5B2640005BEF4 /* Sources */,
 				DACB2D231DD5B2640005BEF4 /* Frameworks */,
 				DACB2D241DD5B2640005BEF4 /* Resources */,
+				DA1AAD281DD5B6A900C5B0BE /* Embed Frameworks */,
+				DA1AAD291DD5B72200C5B0BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -259,6 +286,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DA1AAD291DD5B72200C5B0BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DACB2D221DD5B2640005BEF4 /* Sources */ = {
@@ -420,6 +463,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CFLB4U9W9D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HydroPal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPal;
@@ -433,6 +480,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CFLB4U9W9D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HydroPal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPal;
@@ -518,6 +569,7 @@
 				DACB2D521DD5B2640005BEF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DACB2D531DD5B2640005BEF4 /* Build configuration list for PBXNativeTarget "HydroPalTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +578,7 @@
 				DACB2D551DD5B2640005BEF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DACB2D561DD5B2640005BEF4 /* Build configuration list for PBXNativeTarget "HydroPalUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +587,7 @@
 				DACB2D581DD5B2640005BEF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
