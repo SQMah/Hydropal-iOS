@@ -11,14 +11,16 @@
 		DA1AAD251DD5B6A900C5B0BE /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD221DD5B6A900C5B0BE /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA1AAD261DD5B6A900C5B0BE /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */; };
 		DA1AAD271DD5B6A900C5B0BE /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA46DD561DDB26DB00A219E1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */; };
+		DA46DD581DDB471100A219E1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */; };
+		DAB0B4541DE08863001106D4 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */; };
 		DACB2D2A1DD5B2640005BEF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */; };
-		DACB2D2C1DD5B2640005BEF4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D2B1DD5B2640005BEF4 /* FirstViewController.swift */; };
-		DACB2D2E1DD5B2640005BEF4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D2D1DD5B2640005BEF4 /* SecondViewController.swift */; };
 		DACB2D311DD5B2640005BEF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DACB2D2F1DD5B2640005BEF4 /* Main.storyboard */; };
 		DACB2D331DD5B2640005BEF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DACB2D321DD5B2640005BEF4 /* Assets.xcassets */; };
-		DACB2D361DD5B2640005BEF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DACB2D341DD5B2640005BEF4 /* LaunchScreen.storyboard */; };
 		DACB2D411DD5B2640005BEF4 /* HydroPalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D401DD5B2640005BEF4 /* HydroPalTests.swift */; };
 		DACB2D4C1DD5B2640005BEF4 /* HydroPalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D4B1DD5B2640005BEF4 /* HydroPalUITests.swift */; };
+		DAF97CF51DDDB72E007612A0 /* SexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */; };
+		DAF97CF71DDDB740007612A0 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,13 +58,13 @@
 /* Begin PBXFileReference section */
 		DA1AAD221DD5B6A900C5B0BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		DA1AAD231DD5B6A900C5B0BE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
 		DACB2D261DD5B2640005BEF4 /* HydroPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HydroPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DACB2D2B1DD5B2640005BEF4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		DACB2D2D1DD5B2640005BEF4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		DACB2D301DD5B2640005BEF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DACB2D321DD5B2640005BEF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DACB2D351DD5B2640005BEF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DACB2D371DD5B2640005BEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DACB2D3C1DD5B2640005BEF4 /* HydroPalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HydroPalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACB2D401DD5B2640005BEF4 /* HydroPalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroPalTests.swift; sourceTree = "<group>"; };
@@ -70,6 +72,8 @@
 		DACB2D471DD5B2640005BEF4 /* HydroPalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HydroPalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACB2D4B1DD5B2640005BEF4 /* HydroPalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroPalUITests.swift; sourceTree = "<group>"; };
 		DACB2D4D1DD5B2640005BEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SexTableViewController.swift; sourceTree = "<group>"; };
+		DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,11 +129,13 @@
 			isa = PBXGroup;
 			children = (
 				DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */,
-				DACB2D2B1DD5B2640005BEF4 /* FirstViewController.swift */,
-				DACB2D2D1DD5B2640005BEF4 /* SecondViewController.swift */,
+				DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */,
+				DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */,
+				DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */,
+				DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */,
+				DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */,
 				DACB2D2F1DD5B2640005BEF4 /* Main.storyboard */,
 				DACB2D321DD5B2640005BEF4 /* Assets.xcassets */,
-				DACB2D341DD5B2640005BEF4 /* LaunchScreen.storyboard */,
 				DACB2D371DD5B2640005BEF4 /* Info.plist */,
 			);
 			path = HydroPal;
@@ -218,7 +224,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = HydroPal;
 				TargetAttributes = {
 					DACB2D251DD5B2640005BEF4 = {
@@ -265,7 +271,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DACB2D361DD5B2640005BEF4 /* LaunchScreen.storyboard in Resources */,
 				DACB2D331DD5B2640005BEF4 /* Assets.xcassets in Resources */,
 				DACB2D311DD5B2640005BEF4 /* Main.storyboard in Resources */,
 			);
@@ -308,9 +313,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DACB2D2E1DD5B2640005BEF4 /* SecondViewController.swift in Sources */,
 				DACB2D2A1DD5B2640005BEF4 /* AppDelegate.swift in Sources */,
-				DACB2D2C1DD5B2640005BEF4 /* FirstViewController.swift in Sources */,
+				DA46DD561DDB26DB00A219E1 /* HomeViewController.swift in Sources */,
+				DAB0B4541DE08863001106D4 /* BluetoothSerial.swift in Sources */,
+				DAF97CF71DDDB740007612A0 /* TimeTableViewController.swift in Sources */,
+				DA46DD581DDB471100A219E1 /* SettingsTableViewController.swift in Sources */,
+				DAF97CF51DDDB72E007612A0 /* SexTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,14 +362,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		DACB2D341DD5B2640005BEF4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DACB2D351DD5B2640005BEF4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -383,6 +383,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -433,6 +434,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -468,6 +470,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = HydroPal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,6 +488,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = HydroPal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
