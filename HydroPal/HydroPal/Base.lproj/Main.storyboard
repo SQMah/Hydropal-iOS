@@ -69,6 +69,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="syncButton" destination="QJI-S8-Kwq" id="8hY-Sw-t4v"/>
+                        <outlet property="volumeLabel" destination="fno-Ps-X4n" id="YvX-Zq-xfx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ive-eV-nuM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -94,7 +95,7 @@
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <segue destination="jBs-l0-Zwq" kind="unwind" unwindAction="settingstoHomeWithSegue:" id="j8V-NW-N90"/>
+                                        <segue destination="jBs-l0-Zwq" kind="unwind" identifier="saveSettings" unwindAction="settingstoHomeWithSegue:" id="j8V-NW-N90"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYQ-dI-m1L">

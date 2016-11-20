@@ -51,7 +51,17 @@ class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addDoneButton() // Adds done button to keyboard
+        
+        // Load userdefaults
+        let defaults = UserDefaults.standard
+        waterSwitch.setOn(defaults.bool(forKey: "customGoalSwitch"), animated: false)
+        customWaterTextField.text = defaults.string(forKey: "customGoal")
+        sexLabel.text = defaults.string(forKey: "selectedSex")
+        ledSwitch.setOn(defaults.bool(forKey: "ledSwitch"), animated: false)
+        timeLabel.text = defaults.string(forKey: "reminderTime")
+        
+        
+        addDoneButton() // Adds done button to num pad
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,6 +138,25 @@ class SettingsTableViewController: UITableViewController {
             if let sexTableViewController = segue.destination as? SexTableViewController {
                 sexTableViewController.selectedSex = sex
             }
+        } else if segue.identifier == "saveSettings" {
+            // Save all of the user settings
+            
+            let defaults = UserDefaults.standard
+            if waterSwitch.isOn == true {
+                defaults.set(true, forKey: "customGoalSwitch")
+            } else {
+                defaults.set(false, forKey: "customGoalSwitch")
+            }
+            defaults.set(customWaterTextField.text, forKey: "customGoal")
+            defaults.set(sexLabel.text, forKey: "selectedSex")
+            
+            if ledSwitch.isOn == true {
+                defaults.set(true, forKey: "ledSwitch")
+            } else {
+                defaults.set(false, forKey: "ledSwitch")
+            }
+            
+            defaults.set(timeLabel.text, forKey: "reminderTime")
         }
     }
 }

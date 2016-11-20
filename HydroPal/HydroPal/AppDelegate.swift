@@ -15,7 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+        } else {
+            // Initialising UserDefaults
+            let defaults = UserDefaults.standard
+            defaults.set(false, forKey: "customGoalSwitch")
+            defaults.set("4000", forKey: "customGoal")
+            defaults.set("Select", forKey: "selectedSex")
+            defaults.set(true, forKey: "ledSwitch")
+            defaults.set("60", forKey: "reminderTime")
+            
+            print("First launch, setting UserDefault.")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
         return true
     }
 
