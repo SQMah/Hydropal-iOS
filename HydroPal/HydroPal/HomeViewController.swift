@@ -14,8 +14,12 @@ import CoreBluetooth
 final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     @IBOutlet weak var volumeLabel: UILabel!
+    @IBOutlet weak var goalLabel: UILabel!
+    
+    @IBOutlet weak var goalView1: UIView!
     
     @IBOutlet weak var syncButton: UIButton!
+    
     @IBAction func clickSyncButton(_ sender: Any) {
         if serial.centralManager.state != .poweredOn {
             let alert = UIAlertController(title: "Turn on Bluetooth", message: "Turn on Bluetooth to sync with Hydropal", preferredStyle: .alert)
@@ -56,6 +60,10 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     // Variable to check if serial recently disconnected
     
     var serialDisconnected : Bool = false
+    
+    var goal : Int = 0
+    
+    var volumeString:String = "1500"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +72,8 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         serial = BluetoothSerial(delegate: self)
         serial.writeType = .withResponse // This HM-10 module requires it
         
+        refreshGoals()
+        
         
     }
 
@@ -71,6 +81,84 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func refreshGoals() {
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "customGoalSwitch") == true {
+            goal = Int(defaults.string(forKey: "customGoal")!)!
+        } else {
+            if defaults.string(forKey: "selectedSex") == "Male" {
+                goal = 3700
+            } else {
+                goal = 2700
+            }
+        }
+        goalLabel.text = "of \(String(goal)) ml"
+        let volumeInt: Double = Double(volumeString)!
+        var goalFraction: Double = volumeInt / Double(goal)
+        
+        // If 0.0, won't be visible, so make it tiny
+        if goalFraction == 0.0 {
+            goalFraction = 0.01
+        }
+        
+        //Static circle
+        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: goalView1.bounds.size.width / 2 ,y: goalView1.bounds.size.height / 2), radius: CGFloat(goalView1.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * 1 - M_PI_2), clockwise: true)
+        
+        let staticLayer = CAShapeLayer()
+        staticLayer.path = staticCirclePath.cgPath
+        
+        //change the fill color
+        staticLayer.fillColor = UIColor.clear.cgColor
+        //you can change the stroke color
+        staticLayer.strokeColor = UIColor.lightGray.cgColor
+        //you can change the line width
+        staticLayer.lineWidth = 10.0
+        
+        goalView1.layer.addSublayer(staticLayer)
+        
+        //Adaptive circle
+        
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: goalView1.bounds.size.width / 2 ,y: goalView1.bounds.size.height / 2), radius: CGFloat(goalView1.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * goalFraction - M_PI_2), clockwise: true)
+        
+        let circleLayer = CAShapeLayer()
+        circleLayer.path = circlePath.cgPath
+        
+        let lightBlue = hexStringToUIColor(hex: "#19B9C3")
+        
+        //change the fill color
+        circleLayer.fillColor = UIColor.clear.cgColor
+        //you can change the stroke color
+        circleLayer.strokeColor = lightBlue.cgColor
+        //you can change the line width
+        circleLayer.lineWidth = 10.0
+        
+        goalView1.layer.addSublayer(circleLayer)
+    }
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+// MARK: Bluetooth functions
     
     /// Should be called 5s after we've begun scanning
     func scanTimeOut() {
@@ -81,7 +169,7 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         } else {
         // otherwise, timeout has occurred, stop scanning and give the user the option to try again
         serial.stopScan()
-        let alert = UIAlertController(title: "Hydropal not found", message: "Your Hydropal water bottle could not be found, please bring your bottle closer and retry", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Hydropal not found", message: "Your Hydropal water bottle could not be found, please bring your bottle closer or charge it and retry", preferredStyle: .alert)
         
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
         }
@@ -129,7 +217,7 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         alert.addAction(OKAction)
         
         self.present(alert, animated: true) {
-            }
+        }
     }
     
     // Called when Serial is ready to communicate
@@ -155,7 +243,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         let reminderTime = defaults.string(forKey: "reminderTime")
         
-        print("<" + dateString + "," + remindersState + "," + reminderTime! + ">")
         serial.sendMessageToDevice("<" + dateString + "," + remindersState + "," + reminderTime! + ">")
     }
     
@@ -165,7 +252,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         let letters = message.characters.map { String($0) } // turns message string into array
         var startIndex:Int = 0
         var endIndex:Int = 0
-        var volumeString:String = ""
         
         // Find start and end packet
         for i in 0..<letters.count {
@@ -188,8 +274,8 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         // Change label
         volumeLabel.text = volumeString + " ml"
-        
         serial.disconnect()
+        refreshGoals()
     }
     
     /// Called when de state of the CBCentralManager changes (e.g. when Bluetooth is turned on/off)
@@ -204,6 +290,8 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     }
     
     @IBAction func settingstoHome(segue:UIStoryboardSegue) {
+        // refresh goals when Home is shown
+        refreshGoals()
     }
 }
 
