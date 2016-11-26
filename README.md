@@ -1,4 +1,5 @@
 # HydroPal: iOS Branch
+[![dashboard](https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/dashboard.png)][![settings](https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/settings.png)]
 
 ## Description
 An iOS app that allows communication between the HydroPal intelligent water bottle and a device running iOS.
@@ -8,19 +9,26 @@ An iOS app that allows communication between the HydroPal intelligent water bott
 - [x] Ability to log water consumption
 - [x] Sends latest date time data to the Arduino
 - [x] Settings to change reminder times etc. on the Arduino
+- [x] Calculate recommended water intake values
+- [x] Parse multiple day data
 
 ## To-do
-
-- [ ] Calculate recommended water intake values
-- [ ] Parse multiple day data
 - [ ] Reset total water counter at 12:00 AM and save to yesterday's data
-- [ ] Nicer UI
+- [ ] Sync on settings update
+- [ ] Persistent volume
+- [ ] Working iPad UI
+- [ ] Fix sex selection
 
 ## Credit
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
 
 ## Changelog
-### Release 1.0
+### Alpha 2.0
+- Multi-day sync (past four days)
+- Calculate recommended water intake
+- Much prettier UI
+
+### Alpha 1.0
 - Bluetooth functionality implemented
 - Sends data to Arduino
 - Parses water consumed from Arduino
