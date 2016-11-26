@@ -1,4 +1,4 @@
-# HydroPal: iOS Branch
+# Hydropal: iOS Branch
 
 ## Description
 An iOS app that allows communication between the HydroPal intelligent water bottle and a device running iOS.
