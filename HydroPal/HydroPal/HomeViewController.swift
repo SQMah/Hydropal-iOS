@@ -8,6 +8,7 @@
 // Reset at 12
 // Parse multiple day data
 
+import Foundation
 import UIKit
 import CoreBluetooth
 
@@ -16,7 +17,15 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     @IBOutlet weak var volumeLabel: UILabel!
     @IBOutlet weak var goalLabel: UILabel!
     
+    @IBOutlet weak var goalView0: UIView!
+    
     @IBOutlet weak var goalView1: UIView!
+    
+    
+    @IBOutlet weak var goalView2: UIView!
+    
+    @IBOutlet weak var goalView3: UIView!
+    
     
     @IBOutlet weak var syncButton: UIButton!
     
@@ -64,6 +73,8 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     var goal : Int = 0
     
     var volumeString:String = "1500"
+    
+    var volumeArray = ["1200","1437","2000","1500"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,16 +105,40 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
             }
         }
         goalLabel.text = "of \(String(goal)) ml"
-        let volumeInt: Double = Double(volumeString)!
-        var goalFraction: Double = volumeInt / Double(goal)
+        var goalFraction0: Double = Double(volumeArray[3])! / Double(goal)
+        var goalFraction1: Double = Double(volumeArray[2])! / Double(goal)
+        var goalFraction2: Double = Double(volumeArray[1])! / Double(goal)
+        var goalFraction3: Double = Double(volumeArray[0])! / Double(goal)
         
         // If 0.0, won't be visible, so make it tiny
-        if goalFraction == 0.0 {
-            goalFraction = 0.01
+        if goalFraction0 == 0.0 {
+            goalFraction0 = 0.01
+        }
+        if goalFraction1 == 0.0 {
+            goalFraction1 = 0.01
+        }
+        if goalFraction2 == 0.0 {
+            goalFraction2 = 0.01
+        }
+        if goalFraction3 == 0.0 {
+            goalFraction3 = 0.01
+        }
+        
+        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 12)
+        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
+        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
+        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
+        
+        
+    }
+    
+    func drawCircles(fraction: Double, subView: UIView, staticColor: UIColor, adaptColor: UIColor, strokeWidth: Int) {
+        subView.layer.sublayers?.forEach {
+            $0.removeFromSuperlayer()
         }
         
         //Static circle
-        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: goalView1.bounds.size.width / 2 ,y: goalView1.bounds.size.height / 2), radius: CGFloat(goalView1.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * 1 - M_PI_2), clockwise: true)
+        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * 1 - M_PI_2), clockwise: true)
         
         let staticLayer = CAShapeLayer()
         staticLayer.path = staticCirclePath.cgPath
@@ -111,29 +146,27 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         //change the fill color
         staticLayer.fillColor = UIColor.clear.cgColor
         //you can change the stroke color
-        staticLayer.strokeColor = UIColor.lightGray.cgColor
+        staticLayer.strokeColor = staticColor.cgColor
         //you can change the line width
-        staticLayer.lineWidth = 10.0
+        staticLayer.lineWidth = CGFloat(strokeWidth)
         
-        goalView1.layer.addSublayer(staticLayer)
+        subView.layer.addSublayer(staticLayer)
         
         //Adaptive circle
         
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: goalView1.bounds.size.width / 2 ,y: goalView1.bounds.size.height / 2), radius: CGFloat(goalView1.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * goalFraction - M_PI_2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * fraction - M_PI_2), clockwise: true)
         
         let circleLayer = CAShapeLayer()
         circleLayer.path = circlePath.cgPath
         
-        let lightBlue = hexStringToUIColor(hex: "#19B9C3")
-        
         //change the fill color
         circleLayer.fillColor = UIColor.clear.cgColor
         //you can change the stroke color
-        circleLayer.strokeColor = lightBlue.cgColor
+        circleLayer.strokeColor = adaptColor.cgColor
         //you can change the line width
-        circleLayer.lineWidth = 10.0
+        circleLayer.lineWidth = CGFloat(strokeWidth)
         
-        goalView1.layer.addSublayer(circleLayer)
+        subView.layer.addSublayer(circleLayer)
     }
     
     func hexStringToUIColor (hex:String) -> UIColor {
@@ -243,7 +276,7 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         let reminderTime = defaults.string(forKey: "reminderTime")
         
-        serial.sendMessageToDevice("<" + dateString + "," + remindersState + "," + reminderTime! + ">")
+        serial.sendMessageToDevice("<" + dateString + "," + remindersState + "," + reminderTime! + ",8,15,20,0>")
     }
     
     // Called when Serial gets message
@@ -272,8 +305,10 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
             volumeString = volumeString + letters[i]
         }
         
-        // Change label
-        volumeLabel.text = volumeString + " ml"
+        print(volumeString);
+        // Update with array
+        volumeArray = volumeString.components(separatedBy: ",")
+        
         serial.disconnect()
         refreshGoals()
     }
