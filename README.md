@@ -1,7 +1,7 @@
 # Hydropal: iOS Branch
 
 ## Description
-An iOS app that allows communication between the HydroPal intelligent water bottle and a device running iOS.
+An iOS app that allows communication between the Hydropal intelligent water bottle and a device running iOS.
 
 ## Current Functionality
 - [x] Bluetooth communication using the HM-10 module
@@ -17,6 +17,8 @@ An iOS app that allows communication between the HydroPal intelligent water bott
 - [ ] Persistent volume
 - [ ] Working iPad UI
 - [ ] Fix sex selection
+- [ ] Sleep wake Bluetooth module
+- [ ] Sleep wake Arduino module
 
 ## Credit
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
