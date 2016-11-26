@@ -14,7 +14,6 @@ import CoreBluetooth
 
 final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
-    @IBOutlet weak var volumeLabel: UILabel!
     @IBOutlet weak var goalLabel: UILabel!
     
     @IBOutlet weak var goalView0: UIView!
@@ -25,6 +24,11 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     @IBOutlet weak var goalView2: UIView!
     
     @IBOutlet weak var goalView3: UIView!
+    
+    @IBOutlet weak var volumeLabel1: UILabel!
+    @IBOutlet weak var volumeLabel2: UILabel!
+    @IBOutlet weak var volumeLabel3: UILabel!
+    @IBOutlet weak var volumeLabel4: UILabel!
     
     
     @IBOutlet weak var syncButton: UIButton!
@@ -72,7 +76,9 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     var goal : Int = 0
     
-    var volumeString:String = "1500"
+    var serialString: String = ""
+    
+    var volumeString:String = ""
     
     var volumeArray = ["1200","1437","2000","1500"]
 
@@ -123,6 +129,11 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         if goalFraction3 == 0.0 {
             goalFraction3 = 0.01
         }
+        
+        volumeLabel1.text = "\(volumeArray[3]) ml"
+        volumeLabel2.text = volumeArray[2]
+        volumeLabel3.text = volumeArray[1]
+        volumeLabel4.text = volumeArray[0]
         
         drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 12)
         drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
@@ -282,35 +293,48 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     // Called when Serial gets message
     
     func serialDidReceiveString(_ message: String) {
-        let letters = message.characters.map { String($0) } // turns message string into array
-        var startIndex:Int = 0
-        var endIndex:Int = 0
-        
-        // Find start and end packet
-        for i in 0..<letters.count {
-            //Find start packet
-            if letters[i] == "<" {
-                startIndex = i
-            //Find end packet
-            } else if letters [i] == ">" {
-                endIndex = i
-            } else {
-                // random packet data
+        if message.contains(">") {
+            // Message has ended, process packet
+            serialString += message
+            let letters = serialString.characters.map { String($0) } // turns message string into array
+            var startIndex:Int = 0
+            var endIndex:Int = 0
+            volumeString = ""
+            volumeArray = ["0","0","0","0"]
+            
+            // Find start and end packet
+            for i in 0..<letters.count {
+                //Find start packet
+                if letters[i] == "<" {
+                    startIndex = i
+                    //Find end packet
+                } else if letters [i] == ">" {
+                    endIndex = i
+                } else {
+                    // random packet data
+                }
             }
+            
+            while endIndex == 0 {
+                // Message has not been fully received
+                
+            }
+            // Process packet
+            for i in startIndex + 1..<endIndex {
+                // Adds non-start and end packet chars to volume string
+                volumeString = volumeString + letters[i]
+            }
+            
+            // Update with array
+            volumeArray = volumeString.components(separatedBy: ",")
+            serialString = ""
+            serial.disconnect()
+            refreshGoals()
+        } else {
+            // Packet is incomplete
+            serialString += message
+            print(serialString)
         }
-        
-        // Process packet
-        for i in startIndex + 1..<endIndex {
-            // Adds non-start and end packet chars to volume string
-            volumeString = volumeString + letters[i]
-        }
-        
-        print(volumeString);
-        // Update with array
-        volumeArray = volumeString.components(separatedBy: ",")
-        
-        serial.disconnect()
-        refreshGoals()
     }
     
     /// Called when de state of the CBCentralManager changes (e.g. when Bluetooth is turned on/off)
@@ -327,6 +351,12 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     @IBAction func settingstoHome(segue:UIStoryboardSegue) {
         // refresh goals when Home is shown
         refreshGoals()
+    }
+}
+
+extension String {
+    func contains(find: String) -> Bool{
+        return self.range(of: find) != nil
     }
 }
 

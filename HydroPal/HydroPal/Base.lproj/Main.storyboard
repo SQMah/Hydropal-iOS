@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="493.5" width="375" height="173.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 days ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLX-Xh-RV3">
-                                        <rect key="frame" x="16" y="28" width="111.5" height="39"/>
+                                        <rect key="frame" x="16" y="20" width="111.5" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="MRK-hC-SrB"/>
                                             <constraint firstAttribute="width" constant="112" id="TFB-5m-Rbm"/>
@@ -107,7 +107,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 days ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnJ-Nc-mZ1">
-                                <rect key="frame" x="132" y="521.5" width="112" height="39"/>
+                                <rect key="frame" x="132" y="513.5" width="112" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="6vX-NU-uo5"/>
                                     <constraint firstAttribute="height" constant="39" id="JgK-8K-AMK"/>
@@ -117,7 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yesterday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ze-mE-45s">
-                                <rect key="frame" x="248" y="521.5" width="112" height="39"/>
+                                <rect key="frame" x="248" y="513.5" width="112" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="eaI-eU-hJs"/>
                                     <constraint firstAttribute="width" constant="112" id="hcm-GA-luK"/>
@@ -183,8 +183,8 @@
                             <constraint firstItem="dC3-h0-24M" firstAttribute="centerX" secondItem="sF7-Rx-oco" secondAttribute="centerX" id="VEp-zl-hPP"/>
                             <constraint firstItem="xFj-Wj-Lip" firstAttribute="top" secondItem="fno-Ps-X4n" secondAttribute="bottom" constant="-2" id="Vb0-qV-Aad"/>
                             <constraint firstItem="YkZ-Re-RG3" firstAttribute="centerY" secondItem="dC3-h0-24M" secondAttribute="centerY" id="Wiv-NL-xz3"/>
-                            <constraint firstItem="lnJ-Nc-mZ1" firstAttribute="top" secondItem="xFj-Wj-Lip" secondAttribute="bottom" constant="177" id="XRT-Tc-92p"/>
-                            <constraint firstItem="dC3-h0-24M" firstAttribute="top" secondItem="lnJ-Nc-mZ1" secondAttribute="bottom" constant="8" id="a7j-C7-4Q4"/>
+                            <constraint firstItem="lnJ-Nc-mZ1" firstAttribute="top" secondItem="xFj-Wj-Lip" secondAttribute="bottom" constant="169" id="XRT-Tc-92p"/>
+                            <constraint firstItem="dC3-h0-24M" firstAttribute="top" secondItem="lnJ-Nc-mZ1" secondAttribute="bottom" constant="16" id="a7j-C7-4Q4"/>
                             <constraint firstItem="wbf-an-X5c" firstAttribute="top" secondItem="xFj-Wj-Lip" secondAttribute="bottom" constant="149" id="c7h-T5-9fI"/>
                             <constraint firstItem="6Ze-mE-45s" firstAttribute="centerY" secondItem="lnJ-Nc-mZ1" secondAttribute="centerY" id="d0b-cg-G20"/>
                             <constraint firstItem="FJv-d9-3xx" firstAttribute="centerX" secondItem="6Ze-mE-45s" secondAttribute="centerX" id="dH8-Hu-qrw"/>
@@ -199,7 +199,7 @@
                             <constraint firstItem="Rn1-yP-aZF" firstAttribute="centerX" secondItem="FJv-d9-3xx" secondAttribute="centerX" id="n3v-If-fNU"/>
                             <constraint firstItem="OOt-vN-xRh" firstAttribute="centerX" secondItem="sF7-Rx-oco" secondAttribute="centerX" id="nl0-ko-J8M"/>
                             <constraint firstItem="6Ze-mE-45s" firstAttribute="leading" secondItem="lnJ-Nc-mZ1" secondAttribute="trailing" constant="4" id="oce-2I-caB"/>
-                            <constraint firstItem="dC3-h0-24M" firstAttribute="top" secondItem="lnJ-Nc-mZ1" secondAttribute="bottom" constant="8" id="pcv-4l-RBS"/>
+                            <constraint firstItem="dC3-h0-24M" firstAttribute="top" secondItem="lnJ-Nc-mZ1" secondAttribute="bottom" constant="16" id="pcv-4l-RBS"/>
                             <constraint firstItem="Rn1-yP-aZF" firstAttribute="centerY" secondItem="FJv-d9-3xx" secondAttribute="centerY" id="sta-Q0-rIw"/>
                             <constraint firstItem="FJv-d9-3xx" firstAttribute="centerY" secondItem="dC3-h0-24M" secondAttribute="centerY" id="uW4-Da-49I"/>
                             <constraint firstItem="YkZ-Re-RG3" firstAttribute="baseline" secondItem="dC3-h0-24M" secondAttribute="baseline" id="vuS-lP-oPS"/>
@@ -213,7 +213,10 @@
                         <outlet property="goalView2" destination="L22-rN-yBu" id="cds-R5-nx3"/>
                         <outlet property="goalView3" destination="Nt3-ge-sXN" id="3jG-Ez-bhi"/>
                         <outlet property="syncButton" destination="QJI-S8-Kwq" id="8hY-Sw-t4v"/>
-                        <outlet property="volumeLabel" destination="fno-Ps-X4n" id="YvX-Zq-xfx"/>
+                        <outlet property="volumeLabel1" destination="fno-Ps-X4n" id="QjS-Nn-A9Z"/>
+                        <outlet property="volumeLabel2" destination="FJv-d9-3xx" id="2Cg-Ux-a2r"/>
+                        <outlet property="volumeLabel3" destination="dC3-h0-24M" id="0XG-7A-tcn"/>
+                        <outlet property="volumeLabel4" destination="YkZ-Re-RG3" id="aUr-Pp-9Dr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ive-eV-nuM" userLabel="First Responder" sceneMemberID="firstResponder"/>
