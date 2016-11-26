@@ -1,5 +1,6 @@
 # HydroPal: iOS Branch
-[![dashboard](https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/dashboard.png)][![settings](https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/settings.png)]
+<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/dashboard.png" width="45%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/settings.png" width="45%"></img> 
+
 
 ## Description
 An iOS app that allows communication between the HydroPal intelligent water bottle and a device running iOS.
