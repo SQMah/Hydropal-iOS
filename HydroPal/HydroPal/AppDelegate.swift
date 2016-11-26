@@ -22,11 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let defaults = UserDefaults.standard
             defaults.set(false, forKey: "customGoalSwitch")
             defaults.set("4000", forKey: "customGoal")
-            defaults.set("Select", forKey: "selectedSex")
+            defaults.set("Male", forKey: "selectedSex")
             defaults.set(true, forKey: "ledSwitch")
             defaults.set("60", forKey: "reminderTime")
             
-            print("First launch, setting UserDefault.")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         return true
