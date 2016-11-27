@@ -80,7 +80,15 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     var volumeString:String = ""
     
-    var volumeArray = ["1200","1437","2000","1500"]
+    var volumeArray = ["0","0","0","0"] {
+        didSet {
+            //Triggers on array change
+            volumeLabel1.text = "\(volumeArray[3]) ml"
+            volumeLabel2.text = volumeArray[2]
+            volumeLabel3.text = volumeArray[1]
+            volumeLabel4.text = volumeArray[0]
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,8 +98,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         serial.writeType = .withResponse // This HM-10 module requires it
         
         refreshGoals()
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,11 +135,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         if goalFraction3 == 0.0 {
             goalFraction3 = 0.01
         }
-        
-        volumeLabel1.text = "\(volumeArray[3]) ml"
-        volumeLabel2.text = volumeArray[2]
-        volumeLabel3.text = volumeArray[1]
-        volumeLabel4.text = volumeArray[0]
         
         drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 12)
         drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
@@ -286,8 +287,8 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         }
         
         let reminderTime = defaults.string(forKey: "reminderTime")
-        
-        serial.sendMessageToDevice("<" + dateString + "," + remindersState + "," + reminderTime! + ",8,15,20,0>")
+        print("sent serial")
+        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),8,15,20,0,\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0])>")
     }
     
     // Called when Serial gets message
@@ -295,8 +296,16 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     func serialDidReceiveString(_ message: String) {
         if message.contains(">") {
             // Message has ended, process packet
+            print(message)
+            //Disconnect
+            serial.disconnect()
+            
+            //Add final message to serialString
             serialString += message
+            print(serialString)
             let letters = serialString.characters.map { String($0) } // turns message string into array
+            
+            //Resets
             var startIndex:Int = 0
             var endIndex:Int = 0
             volumeString = ""
@@ -314,11 +323,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
                     // random packet data
                 }
             }
-            
-            while endIndex == 0 {
-                // Message has not been fully received
-                
-            }
             // Process packet
             for i in startIndex + 1..<endIndex {
                 // Adds non-start and end packet chars to volume string
@@ -328,12 +332,10 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
             // Update with array
             volumeArray = volumeString.components(separatedBy: ",")
             serialString = ""
-            serial.disconnect()
             refreshGoals()
         } else {
             // Packet is incomplete
             serialString += message
-            print(serialString)
         }
     }
     
