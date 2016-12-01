@@ -14,17 +14,17 @@ import CoreBluetooth
 
 final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
+    
+    //Goal label, i.e. "of 3700 ml"
     @IBOutlet weak var goalLabel: UILabel!
     
+    // Circle outlets
     @IBOutlet weak var goalView0: UIView!
-    
     @IBOutlet weak var goalView1: UIView!
-    
-    
     @IBOutlet weak var goalView2: UIView!
-    
     @IBOutlet weak var goalView3: UIView!
     
+    // Labels with actual volumes
     @IBOutlet weak var volumeLabel1: UILabel!
     @IBOutlet weak var volumeLabel2: UILabel!
     @IBOutlet weak var volumeLabel3: UILabel!
@@ -80,7 +80,22 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     var volumeString:String = ""
     
-    var volumeArray = ["1200","1437","2000","1500"]
+    var volumeArray = ["0","0","0","0"] {
+        didSet {
+            // When volume array changes, update the text
+            volumeLabel1.text = "\(volumeArray[3]) ml"
+            volumeLabel2.text = volumeArray[2]
+            volumeLabel3.text = volumeArray[1]
+            volumeLabel4.text = volumeArray[0]
+            
+            // Save to user defaults
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(volumeArray[3], forKey: "todayVolume")
+            userDefaults.set(volumeArray[2], forKey: "yesterdayVolume")
+            userDefaults.set(volumeArray[1], forKey: "twoDaysVolume")
+            userDefaults.set(volumeArray[0], forKey: "threeDaysVolume")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,11 +145,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
             goalFraction3 = 0.01
         }
         
-        volumeLabel1.text = "\(volumeArray[3]) ml"
-        volumeLabel2.text = volumeArray[2]
-        volumeLabel3.text = volumeArray[1]
-        volumeLabel4.text = volumeArray[0]
-        
         drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 12)
         drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
         drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
@@ -180,6 +190,7 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         subView.layer.addSublayer(circleLayer)
     }
     
+    //Allows hex colour to be turned into a UIColor object
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -226,7 +237,6 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     }
     
     /// Find Bluetooth peripherals
-    
     func serialDidDiscoverPeripheral(_ peripheral: CBPeripheral, RSSI: NSNumber?) {
         // check whether it is a duplicate
         for exisiting in peripherals {
@@ -287,7 +297,8 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         let reminderTime = defaults.string(forKey: "reminderTime")
         
-        serial.sendMessageToDevice("<" + dateString + "," + remindersState + "," + reminderTime! + ",8,15,20,0>")
+        // ADD WAKE TIME AND SLEEP TIME HERE
+        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),8,15,20,0,\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0])>")
     }
     
     // Called when Serial gets message
@@ -333,11 +344,10 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         } else {
             // Packet is incomplete
             serialString += message
-            print(serialString)
         }
     }
     
-    /// Called when de state of the CBCentralManager changes (e.g. when Bluetooth is turned on/off)
+    /// Called when the state of the CBCentralManager changes (e.g. when Bluetooth is turned on/off)
     func serialDidChangeState() {
         
     }

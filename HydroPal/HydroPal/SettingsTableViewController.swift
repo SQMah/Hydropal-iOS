@@ -22,6 +22,15 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var reminderTimeCell: UITableViewCell!
     @IBOutlet weak var timeLabel: UILabel!
     
+    //Wake time and sleep time
+    @IBOutlet weak var wakeLabel: UILabel!
+    @IBOutlet weak var wakeTimeLabel: UILabel!
+    @IBOutlet weak var wakeTimePicker: UIDatePicker!
+    
+    @IBOutlet weak var sleepLabel: UILabel!
+    @IBOutlet weak var sleepTimeLabel: UILabel!
+    @IBOutlet weak var sleepTimePicker: UIDatePicker!
+    
     @IBAction func waterSwitchValue(_ sender: UISwitch) {
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
@@ -95,7 +104,7 @@ class SettingsTableViewController: UITableViewController {
                 return 10.0
             }
         } else {
-            return 55.0
+            return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
