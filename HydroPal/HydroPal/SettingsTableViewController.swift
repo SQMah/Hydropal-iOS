@@ -31,6 +31,16 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var sleepTimeLabel: UILabel!
     @IBOutlet weak var sleepTimePicker: UIDatePicker!
     
+    @IBAction func wakeTimePickerChanged(_ sender: Any) {
+        // On date picker change, update label
+        timePickerChanged(label: wakeTimeLabel, timePicker: wakeTimePicker)
+    }
+    
+    @IBAction func sleepTimePickerChanged(_ sender: Any) {
+        // On date picker change, update label
+        timePickerChanged(label: sleepTimeLabel, timePicker: sleepTimePicker)
+    }
+    
     @IBAction func waterSwitchValue(_ sender: UISwitch) {
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
@@ -57,6 +67,9 @@ class SettingsTableViewController: UITableViewController {
             sexLabel.text? = sex
         }
     }
+    
+    var wakeTimePickerHidden = false
+    var sleepTimePickerHidden = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,14 +81,48 @@ class SettingsTableViewController: UITableViewController {
         sexLabel.text = defaults.string(forKey: "selectedSex")
         ledSwitch.setOn(defaults.bool(forKey: "ledSwitch"), animated: false)
         timeLabel.text = defaults.string(forKey: "reminderTime")
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:m a"
         
         addDoneButton() // Adds done button to num pad
+        
+        // Time picker setup
+        timePickerChanged(label: wakeTimeLabel, timePicker: wakeTimePicker)
+        timePickerChanged(label: sleepTimeLabel, timePicker: sleepTimePicker)
+        
+        toggleTimePickerColor(titleLabel: wakeLabel, timePickerHidden: wakeTimePickerHidden)
+        toggleTimePickerColor(titleLabel: sleepLabel, timePickerHidden: sleepTimePickerHidden)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Animates selection
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Toggles wake date picker when when cell for time is clicked
+        if indexPath.section == 1 && indexPath.row == 2 {
+            
+            // Shows and hides time picker: toggleTimePicker()
+            wakeTimePickerHidden = !wakeTimePickerHidden
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+            toggleTimePickerColor(titleLabel: wakeLabel, timePickerHidden: wakeTimePickerHidden)
+        }
+        // Toggles wake date picker when when cell for time is clicked
+        if indexPath.section == 1 && indexPath.row == 4 {
+            
+            // Shows and hides time picker: toggleTimePicker()
+            sleepTimePickerHidden = !sleepTimePickerHidden
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+            toggleTimePickerColor(titleLabel: sleepLabel, timePickerHidden: sleepTimePickerHidden)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,10 +150,16 @@ class SettingsTableViewController: UITableViewController {
                 reminderCell.isHidden = true
                 return 10.0
             }
+        } else if wakeTimePickerHidden && indexPath.section == 1 && indexPath.row == 3 {
+            return 0
+        } else if sleepTimePickerHidden && indexPath.section == 1 && indexPath.row == 5 {
+            return 0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
+
+// MARK: Functions
     
     // Add done button to numpad
     
@@ -117,6 +170,23 @@ class SettingsTableViewController: UITableViewController {
         let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: view, action: #selector(UIView.endEditing(_:)))
         keyboardToolbar.items = [flexBarButton, doneBarButton]
         customWaterTextField.inputAccessoryView = keyboardToolbar
+    }
+    
+    // Set label text to time picked
+    
+    func timePickerChanged (label: UILabel, timePicker: UIDatePicker) {
+        label.text = DateFormatter.localizedString(from: timePicker.date, dateStyle: DateFormatter.Style.none, timeStyle: DateFormatter.Style.short)
+    }
+    
+    // Change time picker colour
+    
+    func toggleTimePickerColor(titleLabel: UILabel, timePickerHidden: Bool) {
+        if timePickerHidden == false {
+            titleLabel.textColor = UIColor(red: 21/255, green: 126/255, blue: 251/255, alpha: 1)
+        }
+        if timePickerHidden == true {
+            titleLabel.textColor = UIColor.black
+        }
     }
     
     @IBAction func helptoSettings(segue:UIStoryboardSegue) {
@@ -148,6 +218,7 @@ class SettingsTableViewController: UITableViewController {
                 sexTableViewController.selectedSex = sex
             }
         } else if segue.identifier == "saveSettings" {
+            
             // Save all of the user settings
             
             let defaults = UserDefaults.standard
@@ -166,6 +237,9 @@ class SettingsTableViewController: UITableViewController {
             }
             
             defaults.set(timeLabel.text, forKey: "reminderTime")
+            
+            defaults.set(wakeTimeLabel.text, forKey: "wakeTime")
+            defaults.set(sleepTimeLabel.text, forKey: "sleepTime")
         }
     }
 }
