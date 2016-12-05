@@ -446,6 +446,12 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="502240800.57167399">
                                                         <!--2016-11-30 23:20:00 +0000-->
                                                     </date>
+                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="502214400">
+                                                        <!--2016-11-30 16:00:00 +0000-->
+                                                    </date>
+                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="502300740">
+                                                        <!--2016-12-01 15:59:00 +0000-->
+                                                    </date>
                                                     <locale key="locale" localeIdentifier="en"/>
                                                     <connections>
                                                         <action selector="wakeTimePickerChanged:" destination="XmS-OK-vIU" eventType="valueChanged" id="pDl-56-eVD"/>
@@ -495,6 +501,12 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="502295400.174115">
                                                         <!--2016-12-01 14:30:00 +0000-->
+                                                    </date>
+                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="502214400">
+                                                        <!--2016-11-30 16:00:00 +0000-->
+                                                    </date>
+                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="502300740">
+                                                        <!--2016-12-01 15:59:00 +0000-->
                                                     </date>
                                                     <locale key="locale" localeIdentifier="en"/>
                                                     <connections>

@@ -6,6 +6,7 @@
 //  Copyright © 2016 HydroPal. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
@@ -81,12 +82,22 @@ class SettingsTableViewController: UITableViewController {
         sexLabel.text = defaults.string(forKey: "selectedSex")
         ledSwitch.setOn(defaults.bool(forKey: "ledSwitch"), animated: false)
         timeLabel.text = defaults.string(forKey: "reminderTime")
+       
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:m a"
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         addDoneButton() // Adds done button to num pad
         
         // Time picker setup
+        let wakeTime = defaults.string(forKey: "wakeTime")!
+        let sleepTime = defaults.string(forKey: "sleepTime")!
+        
+        
+        wakeTimePicker.setDate(dateFormatter.date(from: wakeTime)!, animated: false)
+        sleepTimePicker.setDate(dateFormatter.date(from: sleepTime)!, animated: false)
+        
         timePickerChanged(label: wakeTimeLabel, timePicker: wakeTimePicker)
         timePickerChanged(label: sleepTimeLabel, timePicker: sleepTimePicker)
         
@@ -208,6 +219,29 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "saveSettings" {
+            if sleepTimePicker.date.timeIntervalSince(wakeTimePicker.date) > 0 {
+                // Sleep time is larger than wake time
+                return true
+            } else {
+                // Wake time is larger than sleep time
+                
+                let alert = UIAlertController(title: "Choose a valid time", message: "Choose a sleep time later than the wake time.", preferredStyle: .alert)
+                
+                let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                }
+                
+                alert.addAction(OKAction)
+                
+                self.present(alert, animated: true) {
+                }
+                return false
+            } 
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pickTime" {
             if let timeTableViewController = segue.destination as? TimeTableViewController {
@@ -238,8 +272,16 @@ class SettingsTableViewController: UITableViewController {
             
             defaults.set(timeLabel.text, forKey: "reminderTime")
             
-            defaults.set(wakeTimeLabel.text, forKey: "wakeTime")
-            defaults.set(sleepTimeLabel.text, forKey: "sleepTime")
+            let dateFormatter = DateFormatter()
+            dateFormatter.calendar = Calendar(identifier: .iso8601)
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let wakeString = dateFormatter.string(from: wakeTimePicker.date)
+            let sleepString = dateFormatter.string(from: sleepTimePicker.date)
+            
+            defaults.set(wakeString, forKey: "wakeTime")
+            defaults.set(sleepString, forKey: "sleepTime")
         }
     }
 }

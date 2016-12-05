@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
-final class HomeViewController: UIViewController, BluetoothSerialDelegate {
+class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     
     //Goal label, i.e. "of 3700 ml"
@@ -78,22 +78,21 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     var serialString: String = ""
     
-    var volumeString:String = ""
+    var volumeString: String = ""
+    
+    var arrayShift: Bool = false
     
     var volumeArray = ["0","0","0","0"] {
         didSet {
-            // When volume array changes, update the text
             volumeLabel1.text = "\(volumeArray[3]) ml"
             volumeLabel2.text = volumeArray[2]
             volumeLabel3.text = volumeArray[1]
             volumeLabel4.text = volumeArray[0]
             
-            // Save to user defaults
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(volumeArray[3], forKey: "todayVolume")
-            userDefaults.set(volumeArray[2], forKey: "yesterdayVolume")
-            userDefaults.set(volumeArray[1], forKey: "twoDaysVolume")
-            userDefaults.set(volumeArray[0], forKey: "threeDaysVolume")
+            refreshGoals()
+            
+            // Save changes to array
+            UserDefaults.standard.set(volumeArray, forKey: "volumeArray")
         }
     }
 
@@ -104,11 +103,17 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         serial = BluetoothSerial(delegate: self)
         serial.writeType = .withResponse // This HM-10 module requires it
         
+        // get array and set to volumeArray
+        let savedArray = UserDefaults.standard.stringArray(forKey: "volumeArray")
+        volumeArray = savedArray!
+        
+        // refresh goals
         refreshGoals()
         
-        
+        // set up every 1 second timer
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewController.checkTime), userInfo: nil, repeats: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -151,6 +156,63 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
         
         
+    }
+    
+    // Check if there is a day change and shift array
+    func checkTime() {
+        let defaults = UserDefaults.standard
+        let dateFormatter = DateFormatter()
+        let calendar = Calendar(identifier: .gregorian)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss xx"
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // Set last quit date to 12:00 am to compare 12:00 of next day
+        let lastQuitString = defaults.string(forKey: "lastQuitDate")!
+        let lastQuitDate = dateFormatter.date(from: lastQuitString)
+        let startOfLastQuitString: String = String(describing: calendar.startOfDay(for: lastQuitDate!))
+        let startOfLastQuitDate = dateFormatter.date(from: startOfLastQuitString)
+        
+        // Find days since last quit
+        let daysSinceLastQuit = (Calendar.current.dateComponents([.day], from: startOfLastQuitDate!, to: Date()).day!)
+        var localVolumeArray = defaults.stringArray(forKey: "volumeArray")
+        
+        if daysSinceLastQuit < 1 {
+            // Don't shift
+        } else if daysSinceLastQuit >= 1 && daysSinceLastQuit < 2 {
+            // Shift one
+            localVolumeArray![0] = localVolumeArray![1]
+            localVolumeArray![1] = localVolumeArray![2]
+            localVolumeArray![2] = localVolumeArray![3]
+            localVolumeArray![3] = "0"
+        } else if daysSinceLastQuit >= 2 && daysSinceLastQuit < 3 {
+            // Shift twice
+            localVolumeArray![0] = localVolumeArray![2]
+            localVolumeArray![1] = localVolumeArray![3]
+            localVolumeArray![2] = "0"
+            localVolumeArray![3] = "0"
+        } else if daysSinceLastQuit >= 3 && daysSinceLastQuit < 4 {
+            // Shift thrice
+            localVolumeArray![0] = localVolumeArray![3]
+            localVolumeArray![1] = "0"
+            localVolumeArray![2] = "0"
+            localVolumeArray![3] = "0"
+        } else if daysSinceLastQuit >= 4 {
+            // Shift four times
+            localVolumeArray![0] = "0"
+            localVolumeArray![1] = "0"
+            localVolumeArray![2] = "0"
+            localVolumeArray![3] = "0"
+        } else {
+            // Do nothing
+        }
+        defaults.set(localVolumeArray, forKey: "volumeArray")
+        
+        let dateString = dateFormatter.string(from: Date())
+        
+        defaults.set(dateString, forKey: "lastQuitDate")
+        volumeArray = localVolumeArray!
     }
     
     func drawCircles(fraction: Double, subView: UIView, staticColor: UIColor, adaptColor: UIColor, strokeWidth: Int) {
@@ -297,8 +359,23 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         let reminderTime = defaults.string(forKey: "reminderTime")
         
-        // ADD WAKE TIME AND SLEEP TIME HERE
-        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),8,15,20,0,\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0])>")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let wakeDate = dateFormatter.date(from: defaults.string(forKey: "wakeTime")!)
+        let sleepDate = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
+        
+        let wakeSleepFormatter = DateFormatter()
+        wakeSleepFormatter.dateFormat = "H,m"
+        wakeSleepFormatter.calendar = Calendar(identifier: .iso8601)
+        wakeSleepFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let wakeString = wakeSleepFormatter.string(from: wakeDate!)
+        let sleepString = wakeSleepFormatter.string(from: sleepDate!)
+        
+        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0])>")
     }
     
     // Called when Serial gets message
@@ -307,11 +384,12 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
         if message.contains(">") {
             // Message has ended, process packet
             serialString += message
+            serial.disconnect()
             let letters = serialString.characters.map { String($0) } // turns message string into array
             var startIndex:Int = 0
             var endIndex:Int = 0
+            var volumeArrayEdit = ["0", "0", "0", "0"]
             volumeString = ""
-            volumeArray = ["0","0","0","0"]
             
             // Find start and end packet
             for i in 0..<letters.count {
@@ -337,10 +415,9 @@ final class HomeViewController: UIViewController, BluetoothSerialDelegate {
             }
             
             // Update with array
-            volumeArray = volumeString.components(separatedBy: ",")
+            volumeArrayEdit = volumeString.components(separatedBy: ",")
+            volumeArray = volumeArrayEdit
             serialString = ""
-            serial.disconnect()
-            refreshGoals()
         } else {
             // Packet is incomplete
             serialString += message
