@@ -10,11 +10,11 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 - [x] Settings to change reminder times etc. on the Arduino
 - [x] Calculate recommended water intake values
 - [x] Parse multiple day data
+- [x] Reset total water counter at 12:00 AM and save to yesterday's data
+- [x] Persistent volume
 
 ## To-do
-- [ ] Reset total water counter at 12:00 AM and save to yesterday's data
 - [ ] Sync on settings update
-- [ ] Persistent volume
 - [ ] Working iPad UI
 - [ ] Fix sex selection
 - [ ] Sleep wake Bluetooth module
@@ -27,6 +27,11 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/dashboard.png" width="45%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/settings.png" width="45%"></img> 
 
 ## Changelog
+### Alpha 3.0
+- Persistent volume
+- Shifts volume as day changes
+- Wake and sleep times now work
+
 ### Alpha 2.0
 - Multi-day sync (past four days)
 - Calculate recommended water intake
