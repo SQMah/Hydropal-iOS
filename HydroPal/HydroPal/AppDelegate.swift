@@ -17,14 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
+            // Do nothing
         } else {
             // Initialising UserDefaults
             let defaults = UserDefaults.standard
             defaults.set(false, forKey: "customGoalSwitch")
             defaults.set("4000", forKey: "customGoal")
-            defaults.set("Male", forKey: "selectedSex")
             defaults.set(true, forKey: "ledSwitch")
             defaults.set("60", forKey: "reminderTime")
+            defaults.set("Male", forKey: "selectedSex")
             
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }

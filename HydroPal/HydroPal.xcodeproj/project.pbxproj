@@ -117,9 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */,
+				DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */,
 				DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */,
 				DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */,
-				DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */,
 				DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */,
 				DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */,
 				DACB2D2F1DD5B2640005BEF4 /* Main.storyboard */,
