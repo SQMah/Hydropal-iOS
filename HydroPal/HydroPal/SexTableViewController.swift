@@ -25,8 +25,6 @@ class SexTableViewController: UITableViewController {
         }
     }
     
-    
-    
     var selectedSexIndex:Int?
     
     override func viewDidLoad() {
@@ -81,6 +79,7 @@ class SexTableViewController: UITableViewController {
         //update the checkmark for the current row
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
+        //FIXME: Sex tick
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SaveSelectedSex" {
@@ -91,5 +90,6 @@ class SexTableViewController: UITableViewController {
                 }
             }
         }
+        //FIXME: Sex tick glitch
     }
 }
