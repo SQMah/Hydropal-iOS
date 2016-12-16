@@ -26,7 +26,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbf-an-X5c">
                                 <rect key="frame" x="0.0" y="483.5" width="375" height="183.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 days ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLX-Xh-RV3">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Three days ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLX-Xh-RV3">
                                         <rect key="frame" x="16" y="20" width="111.5" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="MRK-hC-SrB"/>
@@ -85,7 +85,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC3-h0-24M">
+<<<<<<< HEAD
                                 <rect key="frame" x="138" y="558.5" width="99" height="67"/>
+=======
+                                <rect key="frame" x="138" y="568.5" width="99" height="67"/>
+>>>>>>> origin/master
                                 <constraints>
                                     <constraint firstAttribute="width" constant="99" id="ccf-Aq-u6G"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="99" id="eym-5g-f9u"/>
@@ -97,7 +101,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJv-d9-3xx">
+<<<<<<< HEAD
                                 <rect key="frame" x="255" y="558.5" width="99" height="67"/>
+=======
+                                <rect key="frame" x="255" y="568.5" width="99" height="67"/>
+>>>>>>> origin/master
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="Ts4-X6-qHx"/>
                                     <constraint firstAttribute="width" constant="99" id="dAl-ey-Qs0"/>
@@ -106,8 +114,13 @@
                                 <color key="textColor" red="0.98823529409999999" green="0.99607843139999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+<<<<<<< HEAD
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 days ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnJ-Nc-mZ1">
                                 <rect key="frame" x="132" y="503.5" width="112" height="39"/>
+=======
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two days ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnJ-Nc-mZ1">
+                                <rect key="frame" x="132" y="513.5" width="112" height="39"/>
+>>>>>>> origin/master
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="6vX-NU-uo5"/>
                                     <constraint firstAttribute="height" constant="39" id="JgK-8K-AMK"/>
@@ -273,7 +286,7 @@
                         </view>
                         <sections>
                             <tableViewSection headerTitle="Recommended water intake" id="PUX-9g-G8K">
-                                <string key="footerTitle">Your sex allows for abetter estimation of how much water you should be drinking each day, alternatively, a custom value for water intake can also replace the estimation</string>
+                                <string key="footerTitle">Your sex allows for a better estimation of how much water you should be drinking each day, alternatively, a custom value for water intake can also replace the estimation</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="6UA-Rg-SIX">
                                         <rect key="frame" x="0.0" y="130" width="375" height="55"/>
@@ -387,13 +400,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minutes before reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUg-nb-8Ke">
-                                                    <rect key="frame" x="17" y="10" width="193.5" height="36"/>
+                                                    <rect key="frame" x="17" y="10" width="194" height="36"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RqO-hC-Pth">
+<<<<<<< HEAD
                                                     <rect key="frame" x="261.5" y="17" width="80" height="23.5"/>
+=======
+                                                    <rect key="frame" x="261.5" y="16" width="80" height="23.5"/>
+>>>>>>> origin/master
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -410,6 +427,7 @@
                                             <segue destination="6Ja-u6-wSa" kind="presentation" identifier="pickTime" id="cjN-7s-iy0"/>
                                         </connections>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="gBo-Mc-9k2" rowHeight="55" style="IBUITableViewCellStyleDefault" id="HIj-qv-34g">
                                         <rect key="frame" x="0.0" y="529" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -426,6 +444,24 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="8:15 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVd-25-Ter">
                                                     <rect key="frame" x="216.5" y="15.5" width="129" height="24"/>
+=======
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="nqq-Rl-U2K" rowHeight="55" style="IBUITableViewCellStyleDefault" id="Ozd-WD-fAP">
+                                        <rect key="frame" x="0.0" y="528" width="375" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ozd-WD-fAP" id="XAa-QJ-k7J">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="54.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Wake time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nqq-Rl-U2K">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="54.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                    <color key="textColor" red="0.08235294118" green="0.4941176471" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="7:20 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRY-Ce-DAk">
+                                                    <rect key="frame" x="260.5" y="14.5" width="80.5" height="25"/>
+>>>>>>> origin/master
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -434,6 +470,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="208" id="6be-HZ-AWV">
                                         <rect key="frame" x="0.0" y="584" width="375" height="208"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -475,6 +512,56 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10:30 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-au-dUi">
                                                     <rect key="frame" x="210" y="16" width="129" height="24"/>
+=======
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="208" id="1va-GZ-ESi">
+                                        <rect key="frame" x="0.0" y="583" width="375" height="208"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1va-GZ-ESi" id="jhw-CM-vvd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pu-f0-dt2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="502240800.57167399">
+                                                        <!--2016-11-30 23:20:00 +0000-->
+                                                    </date>
+                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="502214400">
+                                                        <!--2016-11-30 16:00:00 +0000-->
+                                                    </date>
+                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="502300740">
+                                                        <!--2016-12-01 15:59:00 +0000-->
+                                                    </date>
+                                                    <locale key="locale" localeIdentifier="en"/>
+                                                    <connections>
+                                                        <action selector="wakeTimePickerChanged:" destination="XmS-OK-vIU" eventType="valueChanged" id="pDl-56-eVD"/>
+                                                    </connections>
+                                                </datePicker>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="1pu-f0-dt2" firstAttribute="centerX" secondItem="1va-GZ-ESi" secondAttribute="centerX" id="HNa-DT-PPt"/>
+                                            <constraint firstItem="1pu-f0-dt2" firstAttribute="width" secondItem="1va-GZ-ESi" secondAttribute="width" id="NV1-in-DOH"/>
+                                            <constraint firstItem="1pu-f0-dt2" firstAttribute="height" secondItem="1va-GZ-ESi" secondAttribute="height" id="ldi-gR-3Xc"/>
+                                            <constraint firstItem="1pu-f0-dt2" firstAttribute="centerY" secondItem="1va-GZ-ESi" secondAttribute="centerY" id="mXx-l5-QNL"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" editingAccessoryType="disclosureIndicator" textLabel="AnR-SF-JIM" rowHeight="55" style="IBUITableViewCellStyleDefault" id="y6w-Kf-QGd">
+                                        <rect key="frame" x="0.0" y="791" width="375" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y6w-Kf-QGd" id="4nv-qi-tPw">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="54.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Sleep time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AnR-SF-JIM">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="54.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                    <color key="textColor" red="0.08235294118" green="0.4941176471" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10:30 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58N-QG-zoa">
+                                                    <rect key="frame" x="261.5" y="16.5" width="80" height="24"/>
+>>>>>>> origin/master
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -483,6 +570,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="208" id="0rF-nV-moQ">
                                         <rect key="frame" x="0.0" y="847" width="375" height="208"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -507,6 +595,39 @@
                                                 <constraint firstItem="OCv-n2-Ndg" firstAttribute="height" secondItem="tRR-j7-2yL" secondAttribute="height" id="hoN-Yn-dwC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+=======
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="208" id="SlC-H2-T11">
+                                        <rect key="frame" x="0.0" y="846" width="375" height="208"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SlC-H2-T11" id="TEc-cL-c8J">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPd-Z0-BDq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="502295400.174115">
+                                                        <!--2016-12-01 14:30:00 +0000-->
+                                                    </date>
+                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="502214400">
+                                                        <!--2016-11-30 16:00:00 +0000-->
+                                                    </date>
+                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="502300740">
+                                                        <!--2016-12-01 15:59:00 +0000-->
+                                                    </date>
+                                                    <locale key="locale" localeIdentifier="en"/>
+                                                    <connections>
+                                                        <action selector="sleepTimePickerChanged:" destination="XmS-OK-vIU" eventType="valueChanged" id="gAa-V4-lnp"/>
+                                                    </connections>
+                                                </datePicker>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="YPd-Z0-BDq" firstAttribute="centerX" secondItem="SlC-H2-T11" secondAttribute="centerX" id="PdT-ya-F0Y"/>
+                                            <constraint firstItem="YPd-Z0-BDq" firstAttribute="height" secondItem="SlC-H2-T11" secondAttribute="height" id="cVd-9y-Qcf"/>
+                                            <constraint firstItem="YPd-Z0-BDq" firstAttribute="centerY" secondItem="SlC-H2-T11" secondAttribute="centerY" id="gG9-bk-PwP"/>
+                                            <constraint firstItem="YPd-Z0-BDq" firstAttribute="width" secondItem="SlC-H2-T11" secondAttribute="width" id="mpG-e9-A8M"/>
+                                        </constraints>
+>>>>>>> origin/master
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -526,6 +647,7 @@
                         <outlet property="reminderTimeCell" destination="PEq-aY-8c1" id="BSK-08-32g"/>
                         <outlet property="sexCell" destination="5OW-xL-84k" id="bJz-dW-1uu"/>
                         <outlet property="sexLabel" destination="pGd-Id-Jvm" id="mPX-HV-ckl"/>
+<<<<<<< HEAD
                         <outlet property="sleepLabel" destination="Pgx-9d-CDj" id="MmH-Bl-fcA"/>
                         <outlet property="sleepTimeLabel" destination="EoO-au-dUi" id="bqN-h1-lY5"/>
                         <outlet property="sleepTimePicker" destination="OCv-n2-Ndg" id="cpR-uk-d2b"/>
@@ -533,6 +655,15 @@
                         <outlet property="wakeLabel" destination="gBo-Mc-9k2" id="gae-Eg-T9X"/>
                         <outlet property="wakeTimeLabel" destination="wVd-25-Ter" id="jV4-Eu-msS"/>
                         <outlet property="wakeTimePicker" destination="QYT-b0-d4P" id="B3N-lZ-Dhg"/>
+=======
+                        <outlet property="sleepLabel" destination="AnR-SF-JIM" id="u8W-aU-XcD"/>
+                        <outlet property="sleepTimeLabel" destination="58N-QG-zoa" id="tHL-g3-mEC"/>
+                        <outlet property="sleepTimePicker" destination="YPd-Z0-BDq" id="ZJ4-UL-9Bc"/>
+                        <outlet property="timeLabel" destination="RqO-hC-Pth" id="16o-29-W5f"/>
+                        <outlet property="wakeLabel" destination="nqq-Rl-U2K" id="9DK-Fm-NKk"/>
+                        <outlet property="wakeTimeLabel" destination="mRY-Ce-DAk" id="ZUa-ss-QBP"/>
+                        <outlet property="wakeTimePicker" destination="1pu-f0-dt2" id="6Kg-8e-VN4"/>
+>>>>>>> origin/master
                         <outlet property="waterSwitch" destination="Gee-uH-T7c" id="JPS-zP-0i2"/>
                     </connections>
                 </tableViewController>

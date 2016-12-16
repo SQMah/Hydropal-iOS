@@ -15,6 +15,7 @@
 		DACB2D331DD5B2640005BEF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DACB2D321DD5B2640005BEF4 /* Assets.xcassets */; };
 		DACB2D411DD5B2640005BEF4 /* HydroPalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D401DD5B2640005BEF4 /* HydroPalTests.swift */; };
 		DACB2D4C1DD5B2640005BEF4 /* HydroPalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB2D4B1DD5B2640005BEF4 /* HydroPalUITests.swift */; };
+		DAE17C601DF0FA600084EB7F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAE17C5F1DF0FA600084EB7F /* Launch Screen.storyboard */; };
 		DAF97CF51DDDB72E007612A0 /* SexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */; };
 		DAF97CF71DDDB740007612A0 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		DACB2D471DD5B2640005BEF4 /* HydroPalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HydroPalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACB2D4B1DD5B2640005BEF4 /* HydroPalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroPalUITests.swift; sourceTree = "<group>"; };
 		DACB2D4D1DD5B2640005BEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAE17C5F1DF0FA600084EB7F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SexTableViewController.swift; sourceTree = "<group>"; };
 		DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */,
 				DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */,
 				DACB2D2F1DD5B2640005BEF4 /* Main.storyboard */,
+				DAE17C5F1DF0FA600084EB7F /* Launch Screen.storyboard */,
 				DACB2D321DD5B2640005BEF4 /* Assets.xcassets */,
 				DACB2D371DD5B2640005BEF4 /* Info.plist */,
 			);
@@ -258,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE17C601DF0FA600084EB7F /* Launch Screen.storyboard in Resources */,
 				DACB2D331DD5B2640005BEF4 /* Assets.xcassets in Resources */,
 				DACB2D311DD5B2640005BEF4 /* Main.storyboard in Resources */,
 			);
