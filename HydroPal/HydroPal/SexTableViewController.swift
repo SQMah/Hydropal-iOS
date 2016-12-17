@@ -25,8 +25,6 @@ class SexTableViewController: UITableViewController {
         }
     }
     
-    
-    
     var selectedSexIndex:Int?
     
     override func viewDidLoad() {
@@ -49,10 +47,6 @@ class SexTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55.0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,6 +79,7 @@ class SexTableViewController: UITableViewController {
         //update the checkmark for the current row
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
+        //FIXME: Sex tick
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SaveSelectedSex" {
@@ -95,5 +90,6 @@ class SexTableViewController: UITableViewController {
                 }
             }
         }
+        //FIXME: Sex tick glitch
     }
 }

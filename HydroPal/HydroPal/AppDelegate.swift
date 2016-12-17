@@ -43,12 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(true, forKey: "bottleState")
             defaults.set(["1500","3800","4700","2300"], forKey: "volumeArray")
             defaults.set(false, forKey: "customGoalSwitch")
-
-            defaults.set("4000", forKey: "customGoal")
+            defaults.set("3000", forKey: "customGoal")
             defaults.set(true, forKey: "ledSwitch")
             defaults.set("60", forKey: "reminderTime")
-            defaults.set("Male", forKey: "selectedSex")
-
             
             print("Serial to \(defaults.string(forKey: "serial"))")
             print("Sex set to \(defaults.string(forKey: "selectedSex"))")
@@ -154,3 +151,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.set(volumeArray, forKey: "volumeArray")
     }
 }
+

@@ -12,6 +12,8 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
+let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
 class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     
@@ -34,21 +36,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     @IBOutlet weak var syncButton: UIButton!
     
     @IBAction func clickSyncButton(_ sender: Any) {
-        if serial.centralManager.state != .poweredOn {
-            let alert = UIAlertController(title: "Turn on Bluetooth", message: "Turn on Bluetooth to sync with Hydropal", preferredStyle: .alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            }
-            
-            alert.addAction(OKAction)
-            
-            self.present(alert, animated: true) {
-            }
-        } else {
-            serialDisconnected = false
-            serial.startScan()
-            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.scanTimeOut), userInfo: nil, repeats: false)
-        }
+        bluetoothSync()
     }
     
     /// The peripherals that have been discovered (no duplicates and sorted by asc RSSI)
@@ -56,7 +44,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         didSet {
             // Triggers on array change
             for i in 0..<peripherals.count {
-                if peripherals[i].peripheral.name == "Hydropal" {
+                if peripherals[i].peripheral.name == "Hydropal-" + defaults.string(forKey: "serial")! {
                     serial.stopScan()
                     serial.connectToPeripheral(peripherals[i].peripheral) // Connects to peripheral with name that is "Hydropal"
                     
@@ -98,7 +86,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         // init serial
         serial = BluetoothSerial(delegate: self)
         serial.writeType = .withResponse // This HM-10 module requires it
@@ -112,6 +100,11 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         // set up every 1 second timer
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewController.checkTime), userInfo: nil, repeats: true)
+        
+        // trigger sync
+        //FIXME: Ensure no overlap with other
+        bluetoothSync()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,7 +113,6 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     }
     
     func refreshGoals() {
-        let defaults = UserDefaults.standard
         if defaults.bool(forKey: "customGoalSwitch") == true {
             goal = Int(defaults.string(forKey: "customGoal")!)!
         } else {
@@ -164,7 +156,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         let dateFormatter = DateFormatter()
         let calendar = Calendar(identifier: .gregorian)
         
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss xx"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
@@ -278,6 +270,25 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
 // MARK: Bluetooth functions
     
     /// Should be called 5s after we've begun scanning
+    
+    func bluetoothSync() {
+        if serial.centralManager.state != .poweredOn {
+            let alert = UIAlertController(title: "Turn on Bluetooth", message: "Turn on Bluetooth to sync with Hydropal", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
+            }
+            
+            alert.addAction(OKAction)
+            
+            self.present(alert, animated: true) {
+            }
+        } else {
+            serialDisconnected = false
+            serial.startScan()
+            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.scanTimeOut), userInfo: nil, repeats: false)
+        }
+    }
+    
     func scanTimeOut() {
         // if peripheral is connected do nothing
         if let _ = serial.connectedPeripheral {
@@ -288,7 +299,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         serial.stopScan()
         let alert = UIAlertController(title: "Hydropal not found", message: "Your Hydropal water bottle could not be found, please bring your bottle closer or charge it and retry", preferredStyle: .alert)
         
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
         }
         
         alert.addAction(OKAction)
@@ -327,7 +338,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         // this runs if connection timed out
         let alert = UIAlertController(title: "Connection timed out", message: "Could not connect to your Hydropal water bottle, please retry", preferredStyle: .alert)
         
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
         }
         
         alert.addAction(OKAction)
@@ -348,7 +359,13 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         let dateString = timeFormatter.string(from: currentDate as Date)
         
         // Get user defaults
-        let defaults = UserDefaults.standard
+        let bottleState = defaults.bool(forKey: "bottleState")
+        var bottleStateString: String = "ON"
+        if bottleState {
+            bottleStateString = "ON"
+        } else {
+            bottleStateString = "OFF"
+        }
         let ledSwitchState = defaults.bool(forKey: "ledSwitch")
         var remindersState: String = "ON"
         if ledSwitchState == true {
@@ -375,7 +392,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         let wakeString = wakeSleepFormatter.string(from: wakeDate!)
         let sleepString = wakeSleepFormatter.string(from: sleepDate!)
         
-        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0])>")
+        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0]),\(bottleStateString)>")
     }
     
     // Called when Serial gets message
