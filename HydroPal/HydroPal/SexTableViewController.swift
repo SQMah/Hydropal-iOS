@@ -17,15 +17,11 @@ class SexTableViewController: UITableViewController {
     
     var selectedSex:String? {
         didSet {
-            if selectedSex == "Select" {
-                // Do nothing
-            } else if let sex = selectedSex {
+            if let sex = selectedSex {
                 selectedSexIndex = sexes.index(of: sex)!
             }
         }
     }
-    
-    
     
     var selectedSexIndex:Int?
     
@@ -49,10 +45,6 @@ class SexTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55.0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,6 +77,7 @@ class SexTableViewController: UITableViewController {
         //update the checkmark for the current row
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
+        //FIXME: Sex tick
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SaveSelectedSex" {
