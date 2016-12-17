@@ -24,9 +24,9 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 ## Screenshots
 <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/dashboard.png" width="45%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/settings.png" width="45%"></img>
 
-<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/serial_setup.png" width="15%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sex_setup.png" width="15%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/birthday_setup.png" width="15%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/wake_setup.png" width="15%"></img> 
+<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/serial_setup.png" width="14%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sex_setup.png" width="14%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/birthday_setup.png" width="14%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/wake_setup.png" width="14%"></img> 
 
-<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sleeptime_setup.png" width="15%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/help_setup.png" width="15%"></img> </img>  
+<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sleeptime_setup.png" width="14%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/help_setup.png" width="14%"></img> </img>  
 ## Changelog
 ### Alpha 4.0
 - Fully functional setup screens
