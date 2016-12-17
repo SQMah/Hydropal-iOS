@@ -48,7 +48,7 @@ class AgeWelcomeVCFour: UIViewController {
     }
     
     @IBAction func advanceWake(_ sender: Any) {
-        let alert = UIAlertController(title: "Age Error", message: "Please enter your birthday", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure?", message: "Please enter a valid birthday!", preferredStyle: .alert)
         
         let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
         }

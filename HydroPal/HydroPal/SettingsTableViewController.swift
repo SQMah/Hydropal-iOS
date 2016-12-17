@@ -116,9 +116,9 @@ class SettingsTableViewController: UITableViewController {
         serialTextField.text = defaults.string(forKey: "serial")
         waterSwitch.setOn(defaults.bool(forKey: "customGoalSwitch"), animated: false)
         customWaterTextField.text = defaults.string(forKey: "customGoal")
-        sexLabel.text = defaults.string(forKey: "selectedSex")
+        sex = defaults.string(forKey: "selectedSex")!
         ledSwitch.setOn(defaults.bool(forKey: "ledSwitch"), animated: false)
-        timeLabel.text = defaults.string(forKey: "reminderTime")
+        time = defaults.string(forKey: "reminderTime")!
        
         let dateFormatter = DateFormatter()
         dateFormatter.calendar = Calendar(identifier: .iso8601)
@@ -344,7 +344,6 @@ class SettingsTableViewController: UITableViewController {
             if let sexTableViewController = segue.destination as? SexTableViewController {
                 sexTableViewController.selectedSex = sex
             }
-            //FIXME: Sex tick glitch
         } else if segue.identifier == "saveSettings" {
             
             // Save all of the user settings

@@ -17,9 +17,7 @@ class SexTableViewController: UITableViewController {
     
     var selectedSex:String? {
         didSet {
-            if selectedSex == "Select" {
-                // Do nothing
-            } else if let sex = selectedSex {
+            if let sex = selectedSex {
                 selectedSexIndex = sexes.index(of: sex)!
             }
         }
@@ -90,6 +88,5 @@ class SexTableViewController: UITableViewController {
                 }
             }
         }
-        //FIXME: Sex tick glitch
     }
 }

@@ -89,7 +89,7 @@ class SexWelcomeVCThree: UIViewController {
     }
     
     @IBAction func advanceAge(_ sender: Any) {
-        let alert = UIAlertController(title: "Sex Error", message: "Please select your sex.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Nothing selected!", message: "Please select your sex", preferredStyle: .alert)
         
         let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
         }
