@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         didSet {
             // Triggers on array change
             for i in 0..<peripherals.count {
-                if peripherals[i].peripheral.name == "Hydropal-" + defaults.string(forKey: "serial")! {
+                if peripherals[i].peripheral.name == "Hydropal" + defaults.string(forKey: "serial")! {
                     serial.stopScan()
                     serial.connectToPeripheral(peripherals[i].peripheral) // Connects to peripheral with name that is "Hydropal"
                     
