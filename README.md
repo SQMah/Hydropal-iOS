@@ -22,7 +22,7 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/dashboard.png" width="45%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/settings.png" width="45%"></img> 
+<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/serial_setup.png" width="20%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sex_setup.png" width="20%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/birthday_setup.png" width="20%"></img> </img> <img src="Hydropal-iOS/img/wake_setup.png" width="20%"></img> 
 
 ## Changelog
 ### Alpha 4.0
