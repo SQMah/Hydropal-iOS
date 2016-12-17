@@ -12,13 +12,11 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 - [x] Parse multiple day data
 - [x] Reset total water counter at 12:00 AM and save to yesterday's data
 - [x] Persistent volume
+- [x] Set up screens with birthday selection and serial numbers
 
 ## To-do
 - [ ] Sync on settings update
 - [ ] Working iPad UI
-- [ ] Fix sex selection
-- [ ] Sleep wake Bluetooth module
-- [ ] Sleep wake Arduino module
 
 ## Credit
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
@@ -27,6 +25,11 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/dashboard.png" width="45%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/master/img/settings.png" width="45%"></img> 
 
 ## Changelog
+### Alpha 4.0
+- Fully functional setup screens
+- Implemented help screen
+- Finally fixed sex selection
+
 ### Alpha 3.0
 - Persistent volume
 - Shifts volume as day changes
