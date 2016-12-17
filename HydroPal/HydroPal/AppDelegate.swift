@@ -4,8 +4,7 @@
 //
 //  Created by Shao Qian MAH on 11/11/2016.
 //  Copyright © 2016 HydroPal. All rights reserved.
-//
-// yello3
+// hello
 
 import Foundation
 import UIKit
@@ -15,33 +14,47 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let defaults = UserDefaults.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
-<<<<<<< HEAD
-            // Do nothing
-=======
             shiftVolumeArray()
->>>>>>> origin/master
         } else {
             // Initialising UserDefaults
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+                    
+            let welcomeView = storyboard.instantiateViewController(withIdentifier: "view1")
+            self.window?.rootViewController = welcomeView
+            self.window?.makeKeyAndVisible()
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.calendar = Calendar(identifier: .iso8601)
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let birthdayString = dateFormatter.string(from: NSDate() as Date)
+            let stringDate = dateFormatter.string(from: Date())
+            
+            defaults.set("", forKey: "serial")
+            defaults.set("", forKey: "selectedSex")
+            defaults.set(birthdayString, forKey: "birthday")
+            defaults.set("2016-11-29 23:00:00 +GMT", forKey: "wakeTime")
+            defaults.set("2016-11-30 15:00:00 +GMT", forKey: "sleepTime")
+            defaults.set(true, forKey: "bottleState")
+            defaults.set(["1500","3800","4700","2300"], forKey: "volumeArray")
             defaults.set(false, forKey: "customGoalSwitch")
+
             defaults.set("4000", forKey: "customGoal")
             defaults.set(true, forKey: "ledSwitch")
             defaults.set("60", forKey: "reminderTime")
-<<<<<<< HEAD
             defaults.set("Male", forKey: "selectedSex")
-=======
-            defaults.set("2016-11-30 23:20:00 +GMT", forKey: "wakeTime")
-            defaults.set("2016-12-01 14:30:00 +GMT", forKey: "sleepTime")
-            defaults.set(["1000","2000","3000","4000"], forKey: "volumeArray")
->>>>>>> origin/master
+
             
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-            print("initialise defaults")
+            print("Serial to \(defaults.string(forKey: "serial"))")
+            print("Sex set to \(defaults.string(forKey: "selectedSex"))")
+
+            // Set last quit
+            defaults.set(stringDate, forKey: "lastQuitDate")
         }
         return true
     }
@@ -54,15 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss xx"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let stringDate = dateFormatter.string(from: Date())
         
         defaults.set(stringDate, forKey: "lastQuitDate")
         print(defaults.string(forKey: "lastQuitDate")!)
-        print("Application Entered Background")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -70,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         shiftVolumeArray()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss xx"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let stringDate = dateFormatter.string(from: Date())
@@ -85,19 +98,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss xx"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let stringDate = dateFormatter.string(from: Date())
         defaults.set(stringDate, forKey: "lastQuitDate")
-        print("App will terminate")
     }
     
     func shiftVolumeArray() {
         let dateFormatter = DateFormatter()
         let calendar = Calendar(identifier: .gregorian)
         
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss xx"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
@@ -142,4 +154,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.set(volumeArray, forKey: "volumeArray")
     }
 }
-
