@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C48b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,12 +27,6 @@
                                     <constraint firstAttribute="height" constant="300" id="OOR-Ko-KeK"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Copyright © 2016 Hydropal" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHz-3Q-Er8">
-                                <rect key="frame" x="95" y="627" width="185" height="20"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hydropal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sc-vh-BHY">
                                 <rect key="frame" x="74" y="122" width="227" height="56"/>
                                 <constraints>
@@ -46,12 +40,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.180392161" green="0.32549020649999999" blue="0.42745098469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="CHz-3Q-Er8" secondAttribute="bottom" constant="20" id="8Dn-Yh-axX"/>
                             <constraint firstItem="acM-hx-WNZ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="29.5" id="GEX-7s-TLU"/>
                             <constraint firstItem="3sc-vh-BHY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="P47-Bw-Yqh"/>
                             <constraint firstItem="acM-hx-WNZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Q57-vb-bq2"/>
                             <constraint firstItem="acM-hx-WNZ" firstAttribute="top" secondItem="3sc-vh-BHY" secondAttribute="bottom" constant="35" id="QSy-XY-voT"/>
-                            <constraint firstItem="CHz-3Q-Er8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bDy-IC-9oT"/>
                             <constraint firstItem="3sc-vh-BHY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qdc-Yj-5aw"/>
                         </constraints>
                     </view>

@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set("2016-11-29 23:00:00 +GMT", forKey: "wakeTime")
             defaults.set("2016-11-30 15:00:00 +GMT", forKey: "sleepTime")
             defaults.set(true, forKey: "bottleState")
-            defaults.set(["1500","3800","4700","2300"], forKey: "volumeArray")
+            defaults.set(["0","0","0","0"], forKey: "volumeArray")
             defaults.set(false, forKey: "customGoalSwitch")
             defaults.set("3000", forKey: "customGoal")
             defaults.set(true, forKey: "ledSwitch")
