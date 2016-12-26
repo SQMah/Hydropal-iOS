@@ -141,10 +141,6 @@
 				41C7BC431E02CAAE0067C40C /* HelpViewController.swift */,
 				DAF97CF41DDDB72E007612A0 /* SexTableViewController.swift */,
 				DAF97CF61DDDB740007612A0 /* TimeTableViewController.swift */,
-				DAE17C5F1DF0FA600084EB7F /* Launch Screen.storyboard */,
-				DACB2D321DD5B2640005BEF4 /* Assets.xcassets */,
-				413640D01E022EE1005FE950 /* Main.storyboard */,
-				DACB2D371DD5B2640005BEF4 /* Info.plist */,
 				41C707CB1DF6EDC000B822D4 /* WelcomeViewController.swift */,
 				411AA0961DF9786F0089A3A5 /* SerialWelcomeVCTwo.swift */,
 				411AA0981DF978800089A3A5 /* SexWelcomeVCThree.swift */,
@@ -152,6 +148,10 @@
 				411AA09C1DF978FF0089A3A5 /* WakeWelcomeVCFive.swift */,
 				411AA09E1DF979100089A3A5 /* SleepWelcomeVCSix.swift */,
 				411AA0A01DF979250089A3A5 /* HelpWelcomeVCSeven.swift */,
+				DACB2D321DD5B2640005BEF4 /* Assets.xcassets */,
+				DAE17C5F1DF0FA600084EB7F /* Launch Screen.storyboard */,
+				413640D01E022EE1005FE950 /* Main.storyboard */,
+				DACB2D371DD5B2640005BEF4 /* Info.plist */,
 			);
 			path = HydroPal;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 				TargetAttributes = {
 					DACB2D251DD5B2640005BEF4 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = H9LZFQJXJN;
+						DevelopmentTeam = 59Q72N4CQT;
 						ProvisioningStyle = Automatic;
 					};
 					DACB2D3B1DD5B2640005BEF4 = {
@@ -471,7 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = H9LZFQJXJN;
+				DEVELOPMENT_TEAM = 59Q72N4CQT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -479,7 +479,7 @@
 				INFOPLIST_FILE = HydroPal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = team.Hydropal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hydropal.hydropal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -490,7 +490,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = H9LZFQJXJN;
+				DEVELOPMENT_TEAM = 59Q72N4CQT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -498,7 +498,7 @@
 				INFOPLIST_FILE = HydroPal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = team.Hydropal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hydropal.hydropal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
