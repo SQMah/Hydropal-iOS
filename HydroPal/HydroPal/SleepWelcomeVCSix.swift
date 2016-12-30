@@ -59,5 +59,7 @@ class SleepWelcomeVCSix: UIViewController {
         }
         
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

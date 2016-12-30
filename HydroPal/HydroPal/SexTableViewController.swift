@@ -89,4 +89,8 @@ class SexTableViewController: UITableViewController {
             }
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

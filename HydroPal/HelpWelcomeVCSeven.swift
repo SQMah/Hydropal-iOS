@@ -30,5 +30,7 @@ class HelpWelcomeVCSeven: UIViewController {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         //FIXME: Animation failing
     }
-    
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
 }

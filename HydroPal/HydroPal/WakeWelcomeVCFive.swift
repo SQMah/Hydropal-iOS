@@ -43,5 +43,7 @@ class WakeWelcomeWCFive: UIViewController {
         defaults.set(datepicker.date, forKey: "wakeTime")
     }
     
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

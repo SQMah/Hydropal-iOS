@@ -298,7 +298,7 @@ class SettingsTableViewController: UITableViewController {
                 if let serialNumber = Int(serialText) {
                     if serialNumber > 999 && serialNumber < 10000 {
                         defaults.set(serialText, forKey: "serial")
-                        print("Serial set to \(serialNumber)")
+                        // print("Serial set to \(serialNumber)")
                     } else {
                         serialAlert()
                         return false
@@ -384,5 +384,9 @@ class SettingsTableViewController: UITableViewController {
             defaults.set(wakeString, forKey: "wakeTime")
             defaults.set(sleepString, forKey: "sleepTime")
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

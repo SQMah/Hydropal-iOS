@@ -44,7 +44,7 @@ class SerialWelcomeVCTwo: UIViewController {
             if let serialNumber = Int(serialText) {
                 if serialNumber > 999 && serialNumber < 10000 {
                     defaults.set(serialText, forKey: "serial")
-                    print("Serial set to \(serialNumber)")
+                    // print("Serial set to \(serialNumber)")
                 } else {
                     serialAlert()
                 }
@@ -56,4 +56,7 @@ class SerialWelcomeVCTwo: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

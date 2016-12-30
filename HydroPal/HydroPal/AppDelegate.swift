@@ -4,7 +4,6 @@
 //
 //  Created by Shao Qian MAH on 11/11/2016.
 //  Copyright © 2016 HydroPal. All rights reserved.
-// hello
 
 import Foundation
 import UIKit
@@ -47,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(true, forKey: "ledSwitch")
             defaults.set("60", forKey: "reminderTime")
             
-            print("Serial to \(defaults.string(forKey: "serial"))")
-            print("Sex set to \(defaults.string(forKey: "selectedSex"))")
+            // print("Serial to \(defaults.string(forKey: "serial"))")
+            // print("Sex set to \(defaults.string(forKey: "selectedSex"))")
 
             // Set last quit
             defaults.set(stringDate, forKey: "lastQuitDate")
@@ -72,19 +71,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let stringDate = dateFormatter.string(from: Date())
         
         defaults.set(stringDate, forKey: "lastQuitDate")
-        print(defaults.string(forKey: "lastQuitDate")!)
+        // print(defaults.string(forKey: "lastQuitDate")!)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         shiftVolumeArray()
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        let stringDate = dateFormatter.string(from: Date())
-        defaults.set(stringDate, forKey: "lastQuitDate")
+        //let dateFormatter = DateFormatter()
+        //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+        //dateFormatter.calendar = Calendar(identifier: .iso8601)
+        //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        //let stringDate = dateFormatter.string(from: Date())
+        //defaults.set(stringDate, forKey: "lastQuitDate")
     }
     
 
@@ -149,6 +148,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Do nothing
         }
         defaults.set(volumeArray, forKey: "volumeArray")
+        
+        // Set lastQuit so it doesn't shift twice when HomeViewController loads
+        let dateString = dateFormatter.string(from: Date())
+        defaults.set(dateString, forKey: "lastQuitDate")
     }
 }
 

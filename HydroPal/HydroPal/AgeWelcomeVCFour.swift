@@ -73,7 +73,9 @@ class AgeWelcomeVCFour: UIViewController {
         }
         
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
     
 
