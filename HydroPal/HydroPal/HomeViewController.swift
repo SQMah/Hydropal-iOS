@@ -455,6 +455,10 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func settingstoHome(segue:UIStoryboardSegue) {
         // refresh goals when Home is shown
         refreshGoals()

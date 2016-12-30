@@ -385,4 +385,8 @@ class SettingsTableViewController: UITableViewController {
             defaults.set(sleepString, forKey: "sleepTime")
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

@@ -56,4 +56,7 @@ class SerialWelcomeVCTwo: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

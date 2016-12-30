@@ -92,4 +92,8 @@ class TimeTableViewController: UITableViewController {
             }
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

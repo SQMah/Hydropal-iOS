@@ -111,5 +111,7 @@ class SexWelcomeVCThree: UIViewController {
         }
         // print("Sex set to \(defaults.string(forKey: "selectedSex"))")
     }
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
