@@ -109,7 +109,7 @@ class SexWelcomeVCThree: UIViewController {
         } else {
             sexAlert()
         }
-        print("Sex set to \(defaults.string(forKey: "selectedSex"))")
+        // print("Sex set to \(defaults.string(forKey: "selectedSex"))")
     }
 
 }

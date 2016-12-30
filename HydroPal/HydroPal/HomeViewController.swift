@@ -44,7 +44,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         didSet {
             // Triggers on array change
             for i in 0..<peripherals.count {
-                if peripherals[i].peripheral.name == "Hydropal" + defaults.string(forKey: "serial")! {
+                let peripheralName = "Hydropal" + defaults.string(forKey: "serial")!
+                if peripherals[i].peripheral.name == peripheralName {
                     serial.stopScan()
                     serial.connectToPeripheral(peripherals[i].peripheral) // Connects to peripheral with name that is "Hydropal"
                     
@@ -205,6 +206,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         defaults.set(dateString, forKey: "lastQuitDate")
         volumeArray = localVolumeArray!
+        
+        
     }
     
     func drawCircles(fraction: Double, subView: UIView, staticColor: UIColor, adaptColor: UIColor, strokeWidth: Int) {

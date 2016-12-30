@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C48b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3tR-GN-gfd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C48b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3tR-GN-gfd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -186,7 +186,6 @@
                             <constraint firstItem="dC3-h0-24M" firstAttribute="centerX" secondItem="sF7-Rx-oco" secondAttribute="centerX" id="VEp-zl-hPP"/>
                             <constraint firstItem="xFj-Wj-Lip" firstAttribute="top" secondItem="fno-Ps-X4n" secondAttribute="bottom" constant="-2" id="Vb0-qV-Aad"/>
                             <constraint firstItem="YkZ-Re-RG3" firstAttribute="centerY" secondItem="dC3-h0-24M" secondAttribute="centerY" id="Wiv-NL-xz3"/>
-                            <constraint firstItem="lnJ-Nc-mZ1" firstAttribute="top" secondItem="xFj-Wj-Lip" secondAttribute="bottom" constant="169" id="XRT-Tc-92p"/>
                             <constraint firstItem="dC3-h0-24M" firstAttribute="top" secondItem="lnJ-Nc-mZ1" secondAttribute="bottom" constant="16" id="a7j-C7-4Q4"/>
                             <constraint firstItem="wbf-an-X5c" firstAttribute="top" secondItem="xFj-Wj-Lip" secondAttribute="bottom" constant="149" id="c7h-T5-9fI"/>
                             <constraint firstItem="6Ze-mE-45s" firstAttribute="centerY" secondItem="lnJ-Nc-mZ1" secondAttribute="centerY" id="d0b-cg-G20"/>
@@ -206,6 +205,7 @@
                             <constraint firstItem="dC3-h0-24M" firstAttribute="top" secondItem="lnJ-Nc-mZ1" secondAttribute="bottom" constant="16" id="pcv-4l-RBS"/>
                             <constraint firstItem="Rn1-yP-aZF" firstAttribute="centerY" secondItem="FJv-d9-3xx" secondAttribute="centerY" id="sta-Q0-rIw"/>
                             <constraint firstItem="FJv-d9-3xx" firstAttribute="centerY" secondItem="dC3-h0-24M" secondAttribute="centerY" id="uW4-Da-49I"/>
+                            <constraint firstItem="dC3-h0-24M" firstAttribute="centerY" secondItem="wbf-an-X5c" secondAttribute="centerY" constant="21.75" id="uxq-eW-s0a"/>
                             <constraint firstItem="YkZ-Re-RG3" firstAttribute="baseline" secondItem="dC3-h0-24M" secondAttribute="baseline" id="vuS-lP-oPS"/>
                         </constraints>
                     </view>
@@ -857,7 +857,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is Hydropal, your personal intelligent water bottle! Tap Next to get started." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcl-fo-6zx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is Hydropal, your personal intelligent water bottle! Tap next to get started." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcl-fo-6zx">
                                 <rect key="frame" x="44" y="559.5" width="287" height="38.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38.5" id="yHh-g9-8rB"/>
