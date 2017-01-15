@@ -104,6 +104,8 @@ class SettingsTableViewController: UITableViewController {
     var birthdayPickerHidden = false
     var wakeTimePickerHidden = false
     var sleepTimePickerHidden = false
+    
+    var shouldHide = false
 
     //MARK: viewDidLoad setup
     
@@ -150,6 +152,13 @@ class SettingsTableViewController: UITableViewController {
         toggleTimePickerColor(titleLabel: sleepLabel, timePickerHidden: sleepTimePickerHidden)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        shouldHide = true
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -388,5 +397,13 @@ class SettingsTableViewController: UITableViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        return shouldHide
     }
 }

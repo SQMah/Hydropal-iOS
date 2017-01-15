@@ -12,23 +12,11 @@ class WakeWelcomeWCFive: UIViewController {
 
     
     @IBOutlet weak var datepicker: UIDatePicker!
-
-    func updateWakeTime() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        let date = dateFormatter.date(from: (defaults.string(forKey: "wakeTime"))!)
-        //FIXME: Crashes when set to future
-        
-        datepicker.setDate(date!, animated: false)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        datepicker.locale = Locale(identifier: "en_US")
         datepicker.setValue(UIColor.white, forKeyPath: "textColor")
-        
-        updateWakeTime()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +28,12 @@ class WakeWelcomeWCFive: UIViewController {
     }
     
     @IBAction func advanceSleep(_ sender: Any) {
-        defaults.set(datepicker.date, forKey: "wakeTime")
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+        
+        defaults.set(dateFormatter.string(from: datepicker.date), forKey: "wakeTime")
+        print(defaults.string(forKey: "wakeTime")!)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

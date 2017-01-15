@@ -43,8 +43,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     var peripherals: [(peripheral: CBPeripheral, RSSI: Float)] = [] {
         didSet {
             // Triggers on array change
+            let peripheralName = "Hydropal" + defaults.string(forKey: "serial")!
             for i in 0..<peripherals.count {
-                let peripheralName = "Hydropal" + defaults.string(forKey: "serial")!
                 if peripherals[i].peripheral.name == peripheralName {
                     serial.stopScan()
                     serial.connectToPeripheral(peripherals[i].peripheral) // Connects to peripheral with name that is "Hydropal"
@@ -62,6 +62,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     // Variable to check if serial recently disconnected
     
     var serialDisconnected : Bool = false
+    
+    var serialNominalDisconnect : Bool = false
     
     var goal : Int = 0
     
@@ -84,10 +86,12 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             UserDefaults.standard.set(volumeArray, forKey: "volumeArray")
         }
     }
+    
+    let screenSize = UIScreen.main.bounds
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         // init serial
         serial = BluetoothSerial(delegate: self)
         serial.writeType = .withResponse // This HM-10 module requires it
@@ -95,9 +99,6 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         // get array and set to volumeArray
         let savedArray = UserDefaults.standard.stringArray(forKey: "volumeArray")
         volumeArray = savedArray!
-        
-        // refresh goals
-        refreshGoals()
         
         // set up every 1 second timer
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewController.checkTime), userInfo: nil, repeats: true)
@@ -108,12 +109,18 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // refresh goals
+        refreshGoals()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func refreshGoals() {
+        
         if defaults.bool(forKey: "customGoalSwitch") == true {
             goal = Int(defaults.string(forKey: "customGoal")!)!
         } else {
@@ -143,10 +150,10 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             goalFraction3 = 0.01
         }
         
-        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 12)
-        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
-        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
-        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: 6)
+        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.035))
+        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
+        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
+        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
         
         
     }
@@ -384,6 +391,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
+        print(defaults.string(forKey: "wakeTime")!)
+        
         let wakeDate = dateFormatter.date(from: defaults.string(forKey: "wakeTime")!)
         let sleepDate = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
         
@@ -404,7 +413,9 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         if message.contains(">") {
             // Message has ended, process packet
             serialString += message
+            print(serialString)
             serial.disconnect()
+            serialNominalDisconnect = true
             let letters = serialString.characters.map { String($0) } // turns message string into array
             var startIndex:Int = 0
             var endIndex:Int = 0
@@ -441,6 +452,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         } else {
             // Packet is incomplete
             serialString += message
+            print(serialString)
+            // Add function to check if packet incomplete for more than 3 seconds
         }
     }
     
@@ -452,6 +465,20 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     /// Called when a peripheral disconnected
     func serialDidDisconnect(_ peripheral: CBPeripheral, error: NSError?) {
         serialDisconnected = true
+        if serialNominalDisconnect == true {
+            // do nothing, everything is fine!
+        } else {
+            // Uh-oh Hydropal randomly disconnected
+            let alert = UIAlertController(title: "Sync failed", message: "The sync failed, please try to sync again", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
+            }
+            
+            alert.addAction(OKAction)
+            
+            self.present(alert, animated: true) {
+            }
+        }
         
     }
     
