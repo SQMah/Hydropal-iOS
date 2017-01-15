@@ -12,21 +12,11 @@ class SleepWelcomeVCSix: UIViewController {
 
     //FIXME: Update outlets
     @IBOutlet weak var datepicker: UIDatePicker!
-
-    func updateSleepTime() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        let date = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
-        
-        datepicker.setDate(date!, animated: false)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        datepicker.locale = Locale(identifier: "en_US")
         datepicker.setValue(UIColor.white, forKeyPath: "textColor")
-        
-        updateSleepTime()
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,13 +28,20 @@ class SleepWelcomeVCSix: UIViewController {
     }
     
     //FIXME: Create IBAction and confirm working
-    
+
     @IBAction func advanceUsage(_ sender: Any) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
         
-        let wakeTime = defaults.object(forKey: "wakeTime")!
-        if datepicker.date.timeIntervalSince(wakeTime as! Date) > 0 {
+        let wakeString = defaults.string(forKey: "wakeTime")!
+        let wakeTime = dateFormatter.date(from: wakeString)
+        if datepicker.date.timeIntervalSince(wakeTime! as Date) > 0 {
             // Sleep time is larger than wake time
-            defaults.set(datepicker.date, forKey: "sleepTime")
+            
+            
+            defaults.set(dateFormatter.string(from: datepicker.date), forKey: "sleepTime")
+            print(defaults.string(forKey: "sleepTime")!)
         } else {
             // Wake time is larger than sleep time
             
