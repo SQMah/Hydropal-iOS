@@ -18,6 +18,7 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 ## To-do
 - [ ] Sync on settings update
 - [ ] Animated sync icon
+- [ ] Handle timezones better
 
 ## Credit
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
