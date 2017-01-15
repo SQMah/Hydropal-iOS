@@ -1,6 +1,6 @@
 //
 //  WakeWelcomeWCFive.swift
-//  HydroPal
+//  Hydropal
 //
 //  Created by Cheuk Lun Ko on 8/12/2016.
 //  Copyright © 2016 HydroPal. All rights reserved.

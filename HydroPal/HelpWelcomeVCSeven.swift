@@ -1,6 +1,6 @@
 //
 //  HelpWelcomeVCSeven.swift
-//  HydroPal
+//  Hydropal
 //
 //  Created by Cheuk Lun Ko on 8/12/2016.
 //  Copyright © 2016 HydroPal. All rights reserved.
@@ -9,11 +9,20 @@
 import UIKit
 
 class HelpWelcomeVCSeven: UIViewController {
+    
+    var shouldHide = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        shouldHide = true
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -30,7 +39,16 @@ class HelpWelcomeVCSeven: UIViewController {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         //FIXME: Animation failing
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
+    }
+    
     override var prefersStatusBarHidden : Bool {
-        return true
+        return shouldHide
     }
 }

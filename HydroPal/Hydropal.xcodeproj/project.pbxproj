@@ -239,7 +239,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0810;
-				ORGANIZATIONNAME = HydroPal;
+				ORGANIZATIONNAME = Hydropal;
 				TargetAttributes = {
 					DACB2D251DD5B2640005BEF4 = {
 						CreatedOnToolsVersion = 8.0;
@@ -260,7 +260,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "HydroPal" */;
+			buildConfigurationList = DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "Hydropal" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -524,7 +524,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HydroPal.app/HydroPal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hydropal.temp_caseinsensitive_rename.app/Hydropal.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -539,7 +539,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HydroPal.app/HydroPal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hydropal.temp_caseinsensitive_rename.app/Hydropal.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -574,7 +574,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "HydroPal" */ = {
+		DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "Hydropal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DACB2D4E1DD5B2640005BEF4 /* Debug */,

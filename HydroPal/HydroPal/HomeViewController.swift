@@ -3,7 +3,7 @@
 //  HydroPal
 //
 //  Created by Shao Qian MAH on 15/11/2016.
-//  Copyright © 2016 HydroPal. All rights reserved.
+//  Copyright © 2016 Hydropal. All rights reserved.
 // TO-DO:
 // Reset at 12
 // Parse multiple day data
@@ -150,10 +150,10 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             goalFraction3 = 0.01
         }
         
-        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.035))
-        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
-        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
-        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
+        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.033))
+        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.015))
+        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.015))
+        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.015))
         
         
     }
