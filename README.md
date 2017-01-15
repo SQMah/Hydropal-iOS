@@ -13,10 +13,11 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 - [x] Reset total water counter at 12:00 AM and save to yesterday's data
 - [x] Persistent volume
 - [x] Set up screens with birthday selection and serial numbers
+- [x] Working iPad UI
 
 ## To-do
 - [ ] Sync on settings update
-- [ ] Working iPad UI
+- [ ] Animated sync icon
 
 ## Credit
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
@@ -26,6 +27,11 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 
 <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/serial_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sex_setup.png" width="16%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/birthday_setup.png" width="16%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/wake_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sleeptime_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/help_setup.png" width="16%"></img> </img>  
 ## Changelog
+### Alpha 5.0
+- UI should be iPad friendly now
+- UI is also friendly with smaller devices such as the iPhone 5
+- Added status bar fade animations to make transitions less awkward
+
 ### Alpha 4.0
 - Fully functional setup screens
 - Implemented help screen
