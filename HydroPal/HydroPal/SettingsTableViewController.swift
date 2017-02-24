@@ -355,11 +355,21 @@ class SettingsTableViewController: UITableViewController {
             }
         } else if segue.identifier == "saveSettings" {
             
+            var needSync = false
+            
             // Save all of the user settings
             
             if stateSwitch.isOn {
+                if defaults.bool(forKey: "bottleState") != true {
+                    print("state changed")
+                    needSync = true
+                }
                 defaults.set(true, forKey: "bottleState")
             } else {
+                if defaults.bool(forKey: "bottleState") != false {
+                    print("state changed")
+                    needSync = true
+                }
                 defaults.set(false, forKey: "bottleState")
             }
             defaults.set(serialTextField.text, forKey: "serial")
@@ -373,11 +383,23 @@ class SettingsTableViewController: UITableViewController {
             defaults.set(sexLabel.text, forKey: "selectedSex")
             
             if ledSwitch.isOn == true {
+                if defaults.bool(forKey: "ledSwitch") != true {
+                    print("LED")
+                    needSync = true
+                }
                 defaults.set(true, forKey: "ledSwitch")
             } else {
+                if defaults.bool(forKey: "ledSwitch") != false {
+                    print("LED")
+                    needSync = true
+                }
                 defaults.set(false, forKey: "ledSwitch")
             }
             
+            if defaults.string(forKey: "reminderTime") != timeLabel.text {
+                print("Time")
+                needSync = true
+            }
             defaults.set(timeLabel.text, forKey: "reminderTime")
             
             let dateFormatter = DateFormatter()
@@ -389,9 +411,18 @@ class SettingsTableViewController: UITableViewController {
             let wakeString = dateFormatter.string(from: wakeTimePicker.date)
             let sleepString = dateFormatter.string(from: sleepTimePicker.date)
             
+            if (defaults.string(forKey: "wakeTime") != wakeString) || (defaults.string(forKey: "sleepTime") != sleepString) {
+                print("Wake or sleep")
+                needSync = true
+            }
+            
             defaults.set(birthdayString, forKey: "birthday")
             defaults.set(wakeString, forKey: "wakeTime")
             defaults.set(sleepString, forKey: "sleepTime")
+            
+            print(needSync)
+            
+            defaults.set(needSync, forKey: "needSync")
         }
     }
     
