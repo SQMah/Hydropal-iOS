@@ -36,8 +36,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
     @IBOutlet weak var syncButton: UIButton!
     
     @IBAction func clickSyncButton(_ sender: Any) {
-        bluetoothSync()
         buttonEnabled = false
+        bluetoothSync()
     }
     
     /// The peripherals that have been discovered (no duplicates and sorted by asc RSSI)
@@ -74,11 +74,13 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
     
     var arrayShift: Bool = false
     
-    var connectTriesCounter = 0
+    var loopCounter = 0
     
     var isRotating = false
     var shouldStopRotating = false
     var timer: Timer!
+    var connectTimer: Timer!
+
     
     var buttonEnabled = true {
         didSet {
@@ -375,10 +377,9 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
     
 // MARK: Bluetooth functions
     
-    /// Should be called 5s after we've begun scanning
-    
     func bluetoothSync() {
         if serial.centralManager.state != .poweredOn {
+            buttonEnabled = true
             let alert = UIAlertController(title: "Turn on Bluetooth", message: "Turn on Bluetooth to sync with Hydropal", preferredStyle: .alert)
             
             let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
@@ -389,11 +390,13 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
             self.present(alert, animated: true) {
             }
         } else {
-            serialDisconnected = false
             serial.startScan()
+            serialDisconnected = false
             Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.scanTimeOut), userInfo: nil, repeats: false)
         }
     }
+    
+    /// Should be called 5s after we've begun scanning
     
     func scanTimeOut() {
         // if peripheral is connected do nothing
@@ -459,79 +462,90 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
     // Called when Serial is ready to communicate
     
     func serialIsReady(_ peripheral: CBPeripheral) {
-        
-        connectTriesCounter = 0
-        
-        let currentDate = NSDate()
-        let timeFormatter = DateFormatter()
-        
-        // Formats time to Arduino readable format -> hours,minutes,seconds,days,months,years
-        timeFormatter.dateFormat = "H,m,s,d,M,yyyy"
-        
-        let dateString = timeFormatter.string(from: currentDate as Date)
-        
-        // Get user defaults
-        let bottleState = defaults.bool(forKey: "bottleState")
-        var bottleStateString: String = "ON"
-        if bottleState {
-            bottleStateString = "ON"
-        } else {
-            bottleStateString = "OFF"
-        }
-        let ledSwitchState = defaults.bool(forKey: "ledSwitch")
-        var remindersState: String = "ON"
-        if ledSwitchState == true {
-            remindersState = "ON"
-        } else {
-            remindersState = "OFF"
-        }
-        
-        let reminderTime = defaults.string(forKey: "reminderTime")
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        let wakeDate = dateFormatter.date(from: defaults.string(forKey: "wakeTime")!)
-        let sleepDate = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
-        
-        let wakeSleepFormatter = DateFormatter()
-        wakeSleepFormatter.dateFormat = "H,m"
-        wakeSleepFormatter.calendar = Calendar(identifier: .iso8601)
-        wakeSleepFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        let wakeString = wakeSleepFormatter.string(from: wakeDate!)
-        let sleepString = wakeSleepFormatter.string(from: sleepDate!)
-        
-        while serialNominalDisconnect != true {
-            serial.sendMessageToDevice("aaskdfjdshflhaskfhuhefjmjks adhfkjshadfjhsfdklhlsadfhhskla")
-            serial.sendMessageToDevice("354shdfjkhja sduiwjcnnbvueuiiiasu213diaksdlaailwlawliuduuhjsjhdj")
-            
-            let delayInSeconds = 0.2
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                // here code perfomed with delay
-                serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(self.volumeArray[3]),\(self.volumeArray[2]),\(self.volumeArray[1]),\(self.volumeArray[0]),\(bottleStateString)>")
-            }
-            
-            connectTriesCounter = connectTriesCounter + 1
-            
-            if (connectTriesCounter >= 3) {
-                serial.disconnect()
-                serialNominalDisconnect = false
-            }
-        }
+        connectTimer = Timer.scheduledTimer(timeInterval: 1.6, target: self, selector: #selector(HomeViewController.connect), userInfo: nil, repeats: true)
     }
     
     // Called when Serial gets message
     
+    func connect() {
+        if loopCounter < 8 {
+            let currentDate = NSDate()
+            let timeFormatter = DateFormatter()
+            
+            // Formats time to Arduino readable format -> hours,minutes,seconds,days,months,years
+            timeFormatter.dateFormat = "H,m,s,d,M,yyyy"
+            
+            let dateString = timeFormatter.string(from: currentDate as Date)
+            
+            // Get user defaults
+            let bottleState = defaults.bool(forKey: "bottleState")
+            var bottleStateString: String = "ON"
+            if bottleState {
+                bottleStateString = "ON"
+            } else {
+                bottleStateString = "OFF"
+            }
+            let ledSwitchState = defaults.bool(forKey: "ledSwitch")
+            var remindersState: String = "ON"
+            if ledSwitchState == true {
+                remindersState = "ON"
+            } else {
+                remindersState = "OFF"
+            }
+            
+            let reminderTime = defaults.string(forKey: "reminderTime")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+            dateFormatter.calendar = Calendar(identifier: .iso8601)
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let wakeDate = dateFormatter.date(from: defaults.string(forKey: "wakeTime")!)
+            let sleepDate = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
+            
+            let wakeSleepFormatter = DateFormatter()
+            wakeSleepFormatter.dateFormat = "H,m"
+            wakeSleepFormatter.calendar = Calendar(identifier: .iso8601)
+            wakeSleepFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let wakeString = wakeSleepFormatter.string(from: wakeDate!)
+            let sleepString = wakeSleepFormatter.string(from: sleepDate!)
+            
+            serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(self.volumeArray[3]),\(self.volumeArray[2]),\(self.volumeArray[1]),\(self.volumeArray[0]),\(bottleStateString)>")
+            loopCounter += 1
+            print("try no: \(loopCounter)")
+            
+            buttonEnabled = false
+        } else {
+            // Loop count exceeded
+            // Disconnect and sync failed
+            serialNominalDisconnect = false
+            serial.disconnect()
+            print("loop finished")
+            loopCounter = 0
+            connectTimer.invalidate()
+            connectTimer = nil
+            
+            buttonEnabled = true
+        }
+    }
+    
     func serialDidReceiveString(_ message: String) {
         if message.contains(">") {
+            //stop connect loop
+            connectTimer.invalidate()
+            connectTimer = nil
+            loopCounter = 0
+            
+            //settings have been synced to Hydropal
+            defaults.set(false, forKey: "needSync")
+            
             // Message has ended, process packet
             serialString += message
             print(serialString)
             serialNominalDisconnect = true
             serial.disconnect()
+            
             let letters = serialString.characters.map { String($0) } // turns message string into array
             var startIndex:Int = 0
             var endIndex:Int = 0
@@ -565,6 +579,9 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
             // Enable syncButton
             buttonEnabled = true
         } else {
+            connectTimer.invalidate()
+            loopCounter = 0
+            
             // Packet is incomplete
             serialString += message
             print(serialString)
