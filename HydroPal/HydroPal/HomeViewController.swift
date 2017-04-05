@@ -321,7 +321,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
         }
         
         //Static circle
-        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * 1 - M_PI_2), clockwise: true)
+        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-Double.pi / 2), endAngle:CGFloat(Double.pi * 2 * 1 - Double.pi/2), clockwise: true)
         
         let staticLayer = CAShapeLayer()
         staticLayer.path = staticCirclePath.cgPath
@@ -337,7 +337,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDele
         
         //Adaptive circle
         
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * fraction - M_PI_2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-Double.pi/2), endAngle:CGFloat(Double.pi * 2 * fraction - Double.pi/2), clockwise: true)
         
         let circleLayer = CAShapeLayer()
         circleLayer.path = circlePath.cgPath
