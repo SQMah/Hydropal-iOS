@@ -1,7 +1,8 @@
-# Hydropal: iOS Branch
-
-## Description
+# Hydropal: iOS
 An iOS app that allows communication between the Hydropal intelligent water bottle and a device running iOS.
+<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/dashboard.png" width="49%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/settings.png" width="49%"></img>
+
+<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/serial_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sex_setup.png" width="16%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/birthday_setup.png" width="16%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/wake_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sleeptime_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/help_setup.png" width="16%"></img> </img> 
 
 ## Current Functionality
 - [x] Bluetooth communication using the HM-10 module
@@ -14,20 +15,24 @@ An iOS app that allows communication between the Hydropal intelligent water bott
 - [x] Persistent volume
 - [x] Set up screens with birthday selection and serial numbers
 - [x] Working iPad UI
+- [x] Reminds for sync on settings update
+- [x] Animated sync icon
+- [x] Device attempts to sync multiple times
 
 ## To-do
-- [ ] Sync on settings update
-- [ ] Animated sync icon
-- [ ] Handle timezones better
+- [ ] Chinese localisation
+- [ ] Option to disable update setting sync reminder permanently
 
 ## Credit
 @hoiberg's Bluetooth serial helper class found here: https://github.com/hoiberg/swiftBluetoothSerial
-
-## Screenshots
-<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/dashboard.png" width="49%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/settings.png" width="49%"></img>
-
-<img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/serial_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sex_setup.png" width="16%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/birthday_setup.png" width="16%"></img> </img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/wake_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/sleeptime_setup.png" width="16%"></img> <img src="https://raw.githubusercontent.com/Hydropal/Hydropal-iOS/develop/img/help_setup.png" width="16%"></img> </img>  
+ 
 ## Changelog
+### Release 1.1.1
+- Animated sync button
+- Device attempts to sync multiple times
+- Reminds user to sync if settings changed that only updates on sync
+- 🐞 Fixed wake and sleep times breaking when locale is not en_US
+
 ### Alpha 5.0
 - UI should be iPad friendly now
 - UI is also friendly with smaller devices such as the iPhone 5
