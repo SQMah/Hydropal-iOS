@@ -16,6 +16,7 @@
 		413640D21E022EE1005FE950 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413640D01E022EE1005FE950 /* Main.storyboard */; };
 		41C707CC1DF6EDC000B822D4 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C707CB1DF6EDC000B822D4 /* WelcomeViewController.swift */; };
 		41C7BC441E02CAAE0067C40C /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C7BC431E02CAAE0067C40C /* HelpViewController.swift */; };
+		DA453A931E5FF346003366A5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA453A921E5FF346003366A5 /* UIViewExtensions.swift */; };
 		DA46DD561DDB26DB00A219E1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */; };
 		DA46DD581DDB471100A219E1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */; };
 		DAB0B4541DE08863001106D4 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */; };
@@ -68,6 +69,7 @@
 		413640D11E022EE1005FE950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41C707CB1DF6EDC000B822D4 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		41C7BC431E02CAAE0067C40C /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		DA453A921E5FF346003366A5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				DACB2D291DD5B2640005BEF4 /* AppDelegate.swift */,
 				DA46DD551DDB26DB00A219E1 /* HomeViewController.swift */,
+				DA453A921E5FF346003366A5 /* UIViewExtensions.swift */,
 				DA46DD571DDB471000A219E1 /* SettingsTableViewController.swift */,
 				DAB0B4531DE08863001106D4 /* BluetoothSerial.swift */,
 				41C7BC431E02CAAE0067C40C /* HelpViewController.swift */,
@@ -239,12 +242,12 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0810;
-				ORGANIZATIONNAME = HydroPal;
+				ORGANIZATIONNAME = Hydropal;
 				TargetAttributes = {
 					DACB2D251DD5B2640005BEF4 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 59Q72N4CQT;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					DACB2D3B1DD5B2640005BEF4 = {
 						CreatedOnToolsVersion = 8.0;
@@ -260,7 +263,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "HydroPal" */;
+			buildConfigurationList = DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "Hydropal" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				411AA0A11DF979250089A3A5 /* HelpWelcomeVCSeven.swift in Sources */,
+				DA453A931E5FF346003366A5 /* UIViewExtensions.swift in Sources */,
 				411AA09F1DF979100089A3A5 /* SleepWelcomeVCSix.swift in Sources */,
 				DACB2D2A1DD5B2640005BEF4 /* AppDelegate.swift in Sources */,
 				411AA09B1DF978950089A3A5 /* AgeWelcomeVCFour.swift in Sources */,
@@ -472,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 59Q72N4CQT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -483,8 +487,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hydropal.hydropal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3ea3ffb0-6ddf-4f29-9d0b-4ff3db07bb29";
+				PROVISIONING_PROFILE_SPECIFIER = "Hydropal App Store Distribution";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -495,7 +499,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 59Q72N4CQT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -506,8 +510,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hydropal.hydropal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3ea3ffb0-6ddf-4f29-9d0b-4ff3db07bb29";
+				PROVISIONING_PROFILE_SPECIFIER = "Hydropal App Store Distribution";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -524,7 +528,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HydroPal.app/HydroPal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hydropal.temp_caseinsensitive_rename.app/Hydropal.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -539,7 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = HydroPal.HydroPalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HydroPal.app/HydroPal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hydropal.temp_caseinsensitive_rename.app/Hydropal.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -574,7 +578,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "HydroPal" */ = {
+		DACB2D211DD5B2640005BEF4 /* Build configuration list for PBXProject "Hydropal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DACB2D4E1DD5B2640005BEF4 /* Debug */,

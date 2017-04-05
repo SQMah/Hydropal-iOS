@@ -3,7 +3,7 @@
 //  HydroPal
 //
 //  Created by Cheuk Lun Ko on 15/12/2016.
-//  Copyright © 2016 HydroPal. All rights reserved.
+//  Copyright © 2016 Hydropal. All rights reserved.
 //
 
 import UIKit

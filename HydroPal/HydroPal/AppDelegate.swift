@@ -3,7 +3,7 @@
 //  HydroPal
 //
 //  Created by Shao Qian MAH on 11/11/2016.
-//  Copyright © 2016 HydroPal. All rights reserved.
+//  Copyright © 2016 Hydropal. All rights reserved.
 
 import Foundation
 import UIKit
@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set("3000", forKey: "customGoal")
             defaults.set(true, forKey: "ledSwitch")
             defaults.set("60", forKey: "reminderTime")
+            defaults.set(false, forKey: "needSync")
             
             // print("Serial to \(defaults.string(forKey: "serial"))")
             // print("Sex set to \(defaults.string(forKey: "selectedSex"))")

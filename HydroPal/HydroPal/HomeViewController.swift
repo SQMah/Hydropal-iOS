@@ -3,7 +3,7 @@
 //  HydroPal
 //
 //  Created by Shao Qian MAH on 15/11/2016.
-//  Copyright © 2016 HydroPal. All rights reserved.
+//  Copyright © 2016 Hydropal. All rights reserved.
 // TO-DO:
 // Reset at 12
 // Parse multiple day data
@@ -14,7 +14,7 @@ import CoreBluetooth
 
 let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-class HomeViewController: UIViewController, BluetoothSerialDelegate {
+class HomeViewController: UIViewController, BluetoothSerialDelegate, CALayerDelegate, CAAnimationDelegate {
     
     
     //Goal label, i.e. "of 3700 ml"
@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     @IBOutlet weak var syncButton: UIButton!
     
     @IBAction func clickSyncButton(_ sender: Any) {
+        buttonEnabled = false
         bluetoothSync()
     }
     
@@ -73,6 +74,44 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     var arrayShift: Bool = false
     
+    var loopCounter = 0
+    
+    var isRotating = false
+    var shouldStopRotating = false
+    var timer: Timer!
+    var connectTimer: Timer!
+
+    
+    var buttonEnabled = true {
+        didSet {
+            if buttonEnabled == true {
+                syncButton.isEnabled = true
+                shouldStopRotating = true
+                
+            } else {
+                shouldStopRotating = false
+                self.syncButton.isEnabled = false
+                if isRotating == false {
+                    syncButton.rotate360Degrees(completionDelegate: self)
+                    self.isRotating = true
+                }
+            }
+        }
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if shouldStopRotating == false {
+            syncButton.rotate360Degrees(completionDelegate: self)
+        } else {
+            self.reset()
+        }
+    }
+    
+    func reset() {
+        self.isRotating = false
+        self.shouldStopRotating = false
+    }
+    
     var volumeArray = ["0","0","0","0"] {
         didSet {
             volumeLabel1.text = "\(volumeArray[3]) ml"
@@ -104,7 +143,6 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewController.checkTime), userInfo: nil, repeats: true)
         
         // trigger sync
-        //FIXME: Ensure no overlap with other
         bluetoothSync()
         
     }
@@ -112,6 +150,22 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     override func viewDidAppear(_ animated: Bool) {
         // refresh goals
         refreshGoals()
+        
+        if defaults.bool(forKey: "needSync") == true {
+            // Settings updated
+            
+            let alert = UIAlertController(title: "Settings updated", message: "Some of the settings you changed will only take effect in the next sync", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
+            }
+            
+            alert.addAction(OKAction)
+            
+            self.present(alert, animated: true) {
+            }
+        } else {
+            // do nothing
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,15 +175,59 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
     func refreshGoals() {
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let calendar : NSCalendar = NSCalendar.current as NSCalendar
+        
+        let birthday = dateFormatter.date(from: defaults.string(forKey: "birthday")!)
+        let now = NSDate()
+        
+        let ageComponents = calendar.components(.year, from: birthday!, to: now as Date, options: [])
+        let age: Int = ageComponents.year!
+        
         if defaults.bool(forKey: "customGoalSwitch") == true {
             goal = Int(defaults.string(forKey: "customGoal")!)!
         } else {
-            if defaults.string(forKey: "selectedSex") == "Male" {
-                goal = 3700
-            } else {
-                goal = 2700
+            if defaults.string(forKey: "selectedSex") == "Male" /* male */ {
+                
+                switch age {
+                case 0..<3:
+                    goal = 1300
+                case 3..<8:
+                    goal = 1700
+                case 8..<13:
+                    goal = 2400
+                case 13..<18:
+                    goal = 3300
+                case 18..<150:
+                    goal = 3700
+                default:
+                    goal = 3700
+                }
+                
+            } else /* female */ {
+                
+                switch age {
+                case 0..<3:
+                    goal = 1300
+                case 3..<8:
+                    goal = 1700
+                case 8..<13:
+                    goal = 2100
+                case 13..<18:
+                    goal = 2300
+                case 18..<150:
+                    goal = 2700
+                default:
+                    goal = 2700
+                }
+                
             }
         }
+        
         goalLabel.text = "of \(String(goal)) ml"
         var goalFraction0: Double = Double(volumeArray[3])! / Double(goal)
         var goalFraction1: Double = Double(volumeArray[2])! / Double(goal)
@@ -150,10 +248,10 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             goalFraction3 = 0.01
         }
         
-        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.035))
-        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
-        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
-        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.018))
+        drawCircles(fraction: goalFraction0, subView: goalView0, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.033))
+        drawCircles(fraction: goalFraction1, subView: goalView1, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.015))
+        drawCircles(fraction: goalFraction2, subView: goalView2, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.015))
+        drawCircles(fraction: goalFraction3, subView: goalView3, staticColor: hexStringToUIColor(hex: "#3F4651"),adaptColor: hexStringToUIColor(hex: "#19B9C3"), strokeWidth: Int(Double(screenSize.width) * 0.015))
         
         
     }
@@ -223,7 +321,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         }
         
         //Static circle
-        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * 1 - M_PI_2), clockwise: true)
+        let staticCirclePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-Double.pi / 2), endAngle:CGFloat(Double.pi * 2 * 1 - Double.pi/2), clockwise: true)
         
         let staticLayer = CAShapeLayer()
         staticLayer.path = staticCirclePath.cgPath
@@ -239,7 +337,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         //Adaptive circle
         
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-M_PI_2), endAngle:CGFloat(M_PI * 2 * fraction - M_PI_2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: subView.bounds.size.width / 2 ,y: subView.bounds.size.height / 2), radius: CGFloat(subView.bounds.size.width / 2), startAngle: CGFloat(-Double.pi/2), endAngle:CGFloat(Double.pi * 2 * fraction - Double.pi/2), clockwise: true)
         
         let circleLayer = CAShapeLayer()
         circleLayer.path = circlePath.cgPath
@@ -279,10 +377,9 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     
 // MARK: Bluetooth functions
     
-    /// Should be called 5s after we've begun scanning
-    
     func bluetoothSync() {
         if serial.centralManager.state != .poweredOn {
+            buttonEnabled = true
             let alert = UIAlertController(title: "Turn on Bluetooth", message: "Turn on Bluetooth to sync with Hydropal", preferredStyle: .alert)
             
             let OKAction = UIAlertAction(title: "Dismiss", style: .default) { (action) in
@@ -293,11 +390,13 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             self.present(alert, animated: true) {
             }
         } else {
-            serialDisconnected = false
             serial.startScan()
+            serialDisconnected = false
             Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.scanTimeOut), userInfo: nil, repeats: false)
         }
     }
+    
+    /// Should be called 5s after we've begun scanning
     
     func scanTimeOut() {
         // if peripheral is connected do nothing
@@ -316,6 +415,8 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         self.present(alert, animated: true) {}
         }
+
+        buttonEnabled = true
         
     }
     
@@ -355,67 +456,96 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
         
         self.present(alert, animated: true) {
         }
+        buttonEnabled = true
     }
     
     // Called when Serial is ready to communicate
     
     func serialIsReady(_ peripheral: CBPeripheral) {
-        let currentDate = NSDate()
-        let timeFormatter = DateFormatter()
-        
-        // Formats time to Arduino readable format -> hours,minutes,seconds,days,months,years
-        timeFormatter.dateFormat = "H,m,s,d,M,yyyy"
-        
-        let dateString = timeFormatter.string(from: currentDate as Date)
-        
-        // Get user defaults
-        let bottleState = defaults.bool(forKey: "bottleState")
-        var bottleStateString: String = "ON"
-        if bottleState {
-            bottleStateString = "ON"
-        } else {
-            bottleStateString = "OFF"
-        }
-        let ledSwitchState = defaults.bool(forKey: "ledSwitch")
-        var remindersState: String = "ON"
-        if ledSwitchState == true {
-            remindersState = "ON"
-        } else {
-            remindersState = "OFF"
-        }
-        
-        let reminderTime = defaults.string(forKey: "reminderTime")
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        print(defaults.string(forKey: "wakeTime")!)
-        
-        let wakeDate = dateFormatter.date(from: defaults.string(forKey: "wakeTime")!)
-        let sleepDate = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
-        
-        let wakeSleepFormatter = DateFormatter()
-        wakeSleepFormatter.dateFormat = "H,m"
-        wakeSleepFormatter.calendar = Calendar(identifier: .iso8601)
-        wakeSleepFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        let wakeString = wakeSleepFormatter.string(from: wakeDate!)
-        let sleepString = wakeSleepFormatter.string(from: sleepDate!)
-        
-        serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(volumeArray[3]),\(volumeArray[2]),\(volumeArray[1]),\(volumeArray[0]),\(bottleStateString)>")
+        connectTimer = Timer.scheduledTimer(timeInterval: 1.6, target: self, selector: #selector(HomeViewController.connect), userInfo: nil, repeats: true)
     }
     
     // Called when Serial gets message
     
+    func connect() {
+        if loopCounter < 8 {
+            let currentDate = NSDate()
+            let timeFormatter = DateFormatter()
+            
+            // Formats time to Arduino readable format -> hours,minutes,seconds,days,months,years
+            timeFormatter.dateFormat = "H,m,s,d,M,yyyy"
+            
+            let dateString = timeFormatter.string(from: currentDate as Date)
+            
+            // Get user defaults
+            let bottleState = defaults.bool(forKey: "bottleState")
+            var bottleStateString: String = "ON"
+            if bottleState {
+                bottleStateString = "ON"
+            } else {
+                bottleStateString = "OFF"
+            }
+            let ledSwitchState = defaults.bool(forKey: "ledSwitch")
+            var remindersState: String = "ON"
+            if ledSwitchState == true {
+                remindersState = "ON"
+            } else {
+                remindersState = "OFF"
+            }
+            
+            let reminderTime = defaults.string(forKey: "reminderTime")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+            dateFormatter.calendar = Calendar(identifier: .iso8601)
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let wakeDate = dateFormatter.date(from: defaults.string(forKey: "wakeTime")!)
+            let sleepDate = dateFormatter.date(from: defaults.string(forKey: "sleepTime")!)
+            
+            let wakeSleepFormatter = DateFormatter()
+            wakeSleepFormatter.dateFormat = "H,m"
+            wakeSleepFormatter.calendar = Calendar(identifier: .iso8601)
+            wakeSleepFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let wakeString = wakeSleepFormatter.string(from: wakeDate!)
+            let sleepString = wakeSleepFormatter.string(from: sleepDate!)
+            
+            serial.sendMessageToDevice("<\(dateString),\(remindersState),\(reminderTime!),\(wakeString),\(sleepString),\(self.volumeArray[3]),\(self.volumeArray[2]),\(self.volumeArray[1]),\(self.volumeArray[0]),\(bottleStateString)>")
+            loopCounter += 1
+            print("try no: \(loopCounter)")
+            
+            buttonEnabled = false
+        } else {
+            // Loop count exceeded
+            // Disconnect and sync failed
+            serialNominalDisconnect = false
+            serial.disconnect()
+            print("loop finished")
+            loopCounter = 0
+            connectTimer.invalidate()
+            connectTimer = nil
+            
+            buttonEnabled = true
+        }
+    }
+    
     func serialDidReceiveString(_ message: String) {
         if message.contains(">") {
+            //stop connect loop
+            connectTimer.invalidate()
+            connectTimer = nil
+            loopCounter = 0
+            
+            //settings have been synced to Hydropal
+            defaults.set(false, forKey: "needSync")
+            
             // Message has ended, process packet
             serialString += message
             print(serialString)
-            serial.disconnect()
             serialNominalDisconnect = true
+            serial.disconnect()
+            
             let letters = serialString.characters.map { String($0) } // turns message string into array
             var startIndex:Int = 0
             var endIndex:Int = 0
@@ -434,11 +564,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
                     // random packet data
                 }
             }
-            
-            while endIndex == 0 {
-                // Message has not been fully received
-                
-            }
+
             // Process packet
             for i in startIndex + 1..<endIndex {
                 // Adds non-start and end packet chars to volume string
@@ -449,7 +575,13 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             volumeArrayEdit = volumeString.components(separatedBy: ",")
             volumeArray = volumeArrayEdit
             serialString = ""
+            
+            // Enable syncButton
+            buttonEnabled = true
         } else {
+            connectTimer.invalidate()
+            loopCounter = 0
+            
             // Packet is incomplete
             serialString += message
             print(serialString)
@@ -478,6 +610,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
             
             self.present(alert, animated: true) {
             }
+            buttonEnabled = true
         }
         
     }
@@ -489,6 +622,7 @@ class HomeViewController: UIViewController, BluetoothSerialDelegate {
     @IBAction func settingstoHome(segue:UIStoryboardSegue) {
         // refresh goals when Home is shown
         refreshGoals()
+        
     }
 }
 

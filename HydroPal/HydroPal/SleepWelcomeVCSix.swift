@@ -1,6 +1,6 @@
 //
 //  SleepWelcomeVCSix.swift
-//  HydroPal
+//  Hydropal
 //
 //  Created by Cheuk Lun Ko on 8/12/2016.
 //  Copyright © 2016 HydroPal. All rights reserved.
@@ -33,6 +33,7 @@ class SleepWelcomeVCSix: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         let wakeString = defaults.string(forKey: "wakeTime")!
         let wakeTime = dateFormatter.date(from: wakeString)
